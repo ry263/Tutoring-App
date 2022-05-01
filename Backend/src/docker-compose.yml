@@ -1,0 +1,8 @@
+version: "3"
+services:    
+    pa5:        
+        image: ry263/pa5-slim         
+        env_file: .env
+        ports:                
+            - "5000:5000"        
+    #<EXAMPLE OF MULTI-CONTAINER>        
