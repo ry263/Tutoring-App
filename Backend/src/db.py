@@ -98,9 +98,36 @@ class Availability(db.model):
 
     def __init__(self, **kwargs):
         """
-        Initializes availability object
+        Initializes Availability object
         """
         self.time = kwargs.get("time", "")
+    
+    def serialize(self):   
+        """
+        Serialize an Availability object
+        """ 
+        return {        
+            "id": self.id,               
+            "time": self.time
+        }
 
-class Notifications()
+class Notifications(db.model):
+    __tablename__ = "notifcations"
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    note = db.Column(db.String, nullable=False)
+
+    def __init__(self, **kwargs):
+        """
+        Initializes Notifications object
+        """
+        self.note = kwargs.get("note", "")
+    
+    def serialize(self):   
+        """
+        Serialize a Notifications object
+        """ 
+        return {        
+            "id": self.id,               
+            "note": self.note
+        }
         
