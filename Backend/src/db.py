@@ -1,4 +1,6 @@
+from tokenize import String
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import Integer
 
 db = SQLAlchemy()
 
@@ -6,6 +8,13 @@ ins_assoc_table = db.Table(
     "course_ins_assoc",
     db.Column("course_id", db.Integer, db.ForeignKey("courses.id")),
     db.Column("instructor_id", db.Integer, db.ForeignKey("users.id"))
+)
+
+time_assoc_table = db.Table(
+    "user_time_assoc",
+    db.Column("time_id" , db.Integer, db.ForeignKey("availability.id")),
+     db.Column("user_id", db.Integer, db.ForeignKey("users.id"))
+
 )
 
 
@@ -92,15 +101,20 @@ class User(db.Model):
         }
     
 class Availability(db.model):
+    """
+    Availability model
+    """
     __tablename__ = "availability" 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)    
     time = db.Column(db.String, nullable=False)
+
 
     def __init__(self, **kwargs):
         """
         Initializes Availability object
         """
         self.time = kwargs.get("time", "")
+
     
     def serialize(self):   
         """
@@ -112,6 +126,9 @@ class Availability(db.model):
         }
 
 class Notifications(db.model):
+    """
+    Notifications model
+    """
     __tablename__ = "notifcations"
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     note = db.Column(db.String, nullable=False)
