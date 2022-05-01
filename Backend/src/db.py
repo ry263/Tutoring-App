@@ -66,7 +66,6 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)    
     name = db.Column(db.String, nullable=False)
     #year = db.Column(db.String, nullable=False)
-    
     netid = db.Column(db.String, nullable=False)
     icourses = db.relationship("Course", secondary=ins_assoc_table, back_populates="instructors")
     #scourses = db.relationship("Course", secondary=stu_assoc_table, back_populates="students")
@@ -107,7 +106,6 @@ class Availability(db.model):
     __tablename__ = "availability" 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)    
     time = db.Column(db.String, nullable=False)
-
 
     def __init__(self, **kwargs):
         """
