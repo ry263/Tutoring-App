@@ -184,6 +184,19 @@ def drop_user(course_id):
         return failure_response("User has not been added to this course")
     db.session.commit()
     return success_response(user.serialize())
+
+def fill_courses():
+    subjects = request.get("https://classes.cornell.edu/api/2.0/config/subjects.json?roster=SP22")
+    course_codes = subjects.get("value")
+    for code in course_codes:
+        cs = request.get("https://classes.cornell.edu/api/2.0/search/classes.json?roster=FA14&subject=%s" % code)
+        classnbr = cs.get("catalogNBR")
+        new_course = Course(code = classnbr)
+        db.session.add(new_course)
+
+
+
+
     
     
 
