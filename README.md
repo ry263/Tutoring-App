@@ -151,5 +151,34 @@ Response
 }
 ```
 
+#### Create notification
+```POST /api/notifications/```
+```
+Request
+{
+    "sender_id": <USER INPUT>,
+    "receiver_id": <USER INPUT>,
+    "note": <USER INPUT>
+}
+```
+```
+Response
+<HTTP STATUS CODE 201>
+{
+    "id": <ID>,
+    "sender_id": <USER INPUT FOR SENDER ID>,
+    "receiver_id": <USER INPUT FOR RECEIVER ID>,
+    "note": <USER INPUT FOR NOTE>
+}
+```
 
+#### Delete notification
+```DELETE /api/notifications/{id}```
+```
+Response
+<HTTP STATUS CODE 200>
+{
+    <DELETED NOTIFICATION>
+}
+```
 
