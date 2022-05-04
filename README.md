@@ -16,7 +16,8 @@ Response
     "netid": "ry263",
     "courses": [ <SERIALIZED COURSES WITHOUT USERS>, ... ],
     "availability": [ <SERIALIZED TIMES>, ... ],
-    "notifications": [ <SERIALIZED NOTIFICATIONS>, ... ]
+    "notifications": [ <SERIALIZED NOTIFICATIONS>, ... ],
+    "rate": "20 per hour"
 }
 ```
 
@@ -33,7 +34,8 @@ Response
             "netid": "ry263",
             "courses": [ <SERIALIZED COURSES WITHOUT USERS>, ... ],
             "availability": [ <SERIALIZED TIMES>, ... ],
-            "notifications": [ <SERIALIZED NOTIFICATIONS>, ... ]
+            "notifications": [ <SERIALIZED NOTIFICATIONS>, ... ],
+            "rate": "20 per hour"
         },
         {
             "id": 2,
@@ -41,7 +43,8 @@ Response
             "netid": "lm1",
             "courses": [ <SERIALIZED COURSES WITHOUT USERS>, ... ],
             "availability": [ <SERIALIZED TIMES>, ... ],
-            "notifications": [ <SERIALIZED NOTIFICATIONS>, ... ]
+            "notifications": [ <SERIALIZED NOTIFICATIONS>, ... ],
+            "rate": "20 per hour"
         }
     ]
 }
@@ -58,7 +61,8 @@ Response
     "netid": "ry263",
     "courses": [ <SERIALIZED COURSES WITHOUT USERS>, ... ],
     "availability": [ <SERIALIZED TIMES>, ... ],
-    "notifications": [ <SERIALIZED NOTIFICATIONS>, ... ]
+    "notifications": [ <SERIALIZED NOTIFICATIONS>, ... ],
+    "rate": "20 per hour"
 }
 ```
 
@@ -73,7 +77,8 @@ Response
     "netid": "ry263",
     "courses": [ <SERIALIZED COURSES WITHOUT USERS>, ... ],
     "availability": [ <SERIALIZED TIMES>, ... ],
-    "notifications": [ <SERIALIZED NOTIFICATIONS>, ... ]
+    "notifications": [ <SERIALIZED NOTIFICATIONS>, ... ],
+    "rate": "20 per hour"
 }
 ```
 
@@ -88,7 +93,8 @@ Response
     "netid": "ry263",
     "courses": [ <SERIALIZED COURSES WITHOUT USERS>, ... ],
     "availability": [ <SERIALIZED TIMES>, ... ],
-    "notifications": [ <SERIALIZED NOTIFICATIONS>, ... ]
+    "notifications": [ <SERIALIZED NOTIFICATIONS>, ... ],
+    "rate": "20 per hour"
 }
 ```
 
@@ -104,6 +110,46 @@ Response
     "netid": "ry263",
     "courses": [ <SERIALIZED COURSES WITHOUT USERS>, ... ],
     "availability": [ <SERIALIZED TIMES>, ... ],
-    "notifications": [ <SERIALIZED NOTIFICATIONS>, ... ]
+    "notifications": [ <SERIALIZED NOTIFICATIONS>, ... ],
+    "rate": "20 per hour"
 }
 ```
+
+#### Get all notifications
+```GET /api/notifications/```
+```
+Response
+<HTTP STATUS CODE 200>
+{
+    "notifications" : [
+        {
+            "id": 1,
+            "sender_id": 3,
+            "receiver_id": 1,
+            "note": "Heyo wassup you wanna tutor me my number is ##########"
+        },
+        {
+            "id": 2,
+            "sender_id": 3,
+            "receiver_id": 2,
+            "note": "Hello, if you're free to tutor me this Thursday, please email me back at fake@email.com"
+        }
+    ]
+}
+```
+
+#### Get notification by id
+```GET /api/notifications/{id}/```
+```
+Response
+<HTTP STATUS CODE 200>
+{
+    "id": 1,
+    "sender_id": 3,
+    "receiver_id": 1,
+    "note": "Heyo wassup you wanna tutor me my number is ##########"
+}
+```
+
+
+
