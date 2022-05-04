@@ -1,4 +1,4 @@
-from db import Notifications
+from db import Notification
 from db import db
 from flask import Flask
 from flask import request
@@ -72,7 +72,7 @@ def get_notifications():
     """
     Endpoint for getting all notifications.
     """
-    return success_response({"notifications": [n.serialize for n in Notifications.query.all()]})
+    return success_response({"notifigit cations": [n.serialize for n in Notification.query.all()]})
 
 @app.route("/api/notifications/<int:notification_id>/")
 def get_notification(notification_id):
@@ -95,7 +95,12 @@ def create_notifications():
     note = body.get("note")
     if note is None:
         return failure_response("Note field is empty.")
-    new_noti = Notifications(note=note)
+    
+    if sender_id is not None and receiver_id is not None:
+        noti = Notification(note=note)
+    else:
+        return failure_response("SENDER ID or RECEIVER ID is empty.")
+    new_noti = Notification(note=note)
     db.session.add(new_noti)
     db.session.commit()
     return success_response(new_noti.serialize(), 201)
