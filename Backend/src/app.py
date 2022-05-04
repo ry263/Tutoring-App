@@ -1,12 +1,25 @@
+
 from db import Notification
 from db import db
 from flask import Flask
 from flask import request
 import json
 import os
-
+from db import Availability
 from db import Course
 from db import User
+from flask import Flask, redirect, request, url_for, Request
+from oauthlib.oauth2 import WebApplicationClient
+import requests
+from flask_login import (
+    LoginManager,
+    current_user,
+    login_required,
+    login_user,
+    logout_user,
+    UserMixin
+)
+from loguru import logger
 
 app = Flask(__name__)
 db_filename = "cms.db"
@@ -72,7 +85,7 @@ def get_notifications():
     """
     Endpoint for getting all notifications.
     """
-    return success_response({"notifigit cations": [n.serialize for n in Notification.query.all()]})
+    return success_response({"notifications": [n.serialize for n in Notification.query.all()]})
 
 @app.route("/api/notifications/<int:notification_id>/")
 def get_notification(notification_id):
@@ -100,7 +113,9 @@ def create_notifications():
         noti = Notification(note=note)
     else:
         return failure_response("SENDER ID or RECEIVER ID is empty.")
-    new_noti = Notification(note=note)
+    new_noti = Notification(note=note,
+    sender_id = sender_id,
+    receiver_id = receiver_id)
     db.session.add(new_noti)
     db.session.commit()
     return success_response(new_noti.serialize(), 201)
@@ -175,6 +190,31 @@ def drop_user(course_id):
         return failure_response("User has not been added to this course")
     db.session.commit()
     return success_response(user.serialize())
+
+@app.route("/users/current/")
+def get_current_user():  
+    if logged_in(current_user) == True:
+        return success_response(current_user.serialize())
+    else:
+        return failure_response("User logged out")
+
+@app.route("/api/users/<int:user_id>/availability/", methods = ["POST"])
+def add_availablility(user_id):
+    user = User.query.filter_by(id=user_id).first()
+    if user is None:
+        return failure_response("User not found!")
+    body = json.loads(request.data)
+    time= body.get("time")
+    if time == None:
+        return failure_response("invalid request", 400)
+    new_av = Availability(
+        time = time,
+        user_id = user_id
+    )
+    db.session.add(new_av)
+    db.session.commit()
+
+    return success_response(new_av.serialize_nc, 201)
 
 def fill_courses():
     subjects = request.get("https://classes.cornell.edu/api/2.0/config/subjects.json?roster=SP22")

@@ -46,7 +46,7 @@ class Course(db.Model):
         return {        
             "id": self.id,        
             "code": self.code,        
-            "instructors": [i.serialize_nc() for i in self.instructors]
+            "tutors": [i.serialize_nc() for i in self.instructors]
         }
 
     def serialize_nc(self):   
@@ -68,6 +68,9 @@ class User(db.Model):
     #year = db.Column(db.String, nullable=False)
     netid = db.Column(db.String, nullable=False)
     icourses = db.relationship("Course", secondary=ins_assoc_table, back_populates="instructors")
+    availability = db.relationship("Availability", cascade = "delete")
+    rate = db.Column(db.String, nullable=False)
+    
     #scourses = db.relationship("Course", secondary=stu_assoc_table, back_populates="students")
 
     def __init__(self, **kwargs):
@@ -85,7 +88,11 @@ class User(db.Model):
             "id": self.id,               
             "name": self.name,    
             "netid": self.netid,
-            "courses": ([c.serialize_nc() for c in self.icourses]) #+ [c.serialize_nc() for c in self.scourses])
+            "courses": ([c.serialize_nc() for c in self.icourses]),
+            "availabiltiy": [a.serialize_nc() for a in self.availability],
+            "rate": self.rate
+
+            #+ [c.serialize_nc() for c in self.scourses])
             #"courses": list(set([c.serialize_nc() for c in self.icourses] + [c.serialize_nc() for c in self.scourses]))
         }
 
@@ -96,7 +103,9 @@ class User(db.Model):
         return {        
             "id": self.id,               
             "name": self.name,    
-            "netid": self.netid
+            "netid": self.netid,
+            "availabiltiy": [a.serialize_nc() for a in self.availability],
+            "rate":self.rate
         }
     
 class Availability(db.model):
@@ -106,21 +115,32 @@ class Availability(db.model):
     __tablename__ = "availability" 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)    
     time = db.Column(db.String, nullable=False)
+    user_id = db.Column(db.Integer,db.ForeignKey("user.id"),nullable=False)
 
     def __init__(self, **kwargs):
         """
         Initializes Availability object
         """
         self.time = kwargs.get("time", "")
+        self.user_id = kwargs.get("user_id", "")
 
     
+    def serialize_nc(self):
+        """
+        Serialize an Availability object simply
+        """ 
+        return {                       
+            "time": self.time
+        }
+
     def serialize(self):   
         """
         Serialize an Availability object
         """ 
         return {        
             "id": self.id,               
-            "time": self.time
+            "time": self.time,
+            "user_id":self.user_id 
         }
 
 class Notification(db.model):
