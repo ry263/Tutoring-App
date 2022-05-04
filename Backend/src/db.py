@@ -123,23 +123,23 @@ class Availability(db.model):
             "time": self.time
         }
 
-class Notifications(db.model):
+class Notification(db.model):
     """
-    Notifications model
+    Notification model
     """
-    __tablename__ = "notifcations"
+    __tablename__ = "notifications"
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     note = db.Column(db.String, nullable=False)
 
     def __init__(self, **kwargs):
         """
-        Initializes Notifications object
+        Initializes Notification object
         """
         self.note = kwargs.get("note", "")
     
     def serialize(self):   
         """
-        Serialize a Notifications object
+        Serialize a Notification object
         """ 
         return {        
             "id": self.id,               

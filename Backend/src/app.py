@@ -1,3 +1,4 @@
+from db import Notifications
 from db import db
 from flask import Flask
 from flask import request
@@ -6,7 +7,6 @@ import os
 
 from db import Course
 from db import User
-from db import Assignment
 
 app = Flask(__name__)
 db_filename = "cms.db"
@@ -32,12 +32,6 @@ def failure_response(message, code=404):
     #return json.dumps({"success": False, "error": message}), code
 
 @app.route("/")
-def get_default():
-    """
-    Endpoint for printing "<netid> was here!"
-    """
-    #return json.dumps(os.environ.get("NETID") + " was here!"), 200
-    return os.environ.get("NETID") + " was here!"
 
 @app.route("/api/courses/")
 def get_courses():
@@ -45,7 +39,7 @@ def get_courses():
     Endpoint for getting all courses
     """
     return success_response({"courses": [c.serialize() for c in Course.query.all()]})
-
+    
 @app.route("/api/courses/", methods=["POST"])
 def make_course():
     """
@@ -63,44 +57,48 @@ def make_course():
     db.session.commit()
     return success_response(new_course.serialize(), 201)
 
-@app.route("/api/courses/<int:course_id>/")
-def get_course(course_id):
+@app.route("/api/courses/<int:code>/")
+def get_course(code):
     """
-    Endpoint for getting a course by id
+    Endpoint for getting a course by code
     """
-    course = Course.query.filter_by(id=course_id).first()
+    course = Course.query.filter_by(code=code).first()
     if course is None:
         return failure_response("Course not found")
     return success_response(course.serialize())
 
-@app.route("/api/courses/<int:course_id>/", methods=["DELETE"])
-def delete_course(course_id):
+@app.route("/api/notifications/")
+def get_notifications():
     """
-    Endpoint for deleting a course
+    Endpoint for getting all notifications.
     """
-    course = Course.query.filter_by(id=course_id).first()
-    if course is None:
-        return failure_response("Course not found")
-    db.session.delete(course)
-    db.session.commit()
-    return success_response(course.serialize())
+    return success_response({"notifications": [n.serialize for n in Notifications.query.all()]})
 
-@app.route("/api/users/", methods=["POST"])
-def make_user():
+@app.route("/api/notifications/<int:notification_id>/")
+def get_notification(notification_id):
     """
-    Endpoint for creating a user
+    Endpoint for getting a notification.
+    """
+    noti = User.query.filter_by(id=notification_id).first()
+    if noti is None:
+        return failure_response("Notification not found")
+    return success_response(noti.serialize())
+
+@app.route("/api/notifications/", methods=["POST"])
+def create_notifications():
+    """
+    Endpoint for creating a notification.
     """
     body = json.loads(request.data)
-    name=body.get("name")
-    netid=body.get("netid")
-    if name is None:
-        return failure_response("Name field empty", 400)
-    if netid is None:
-        return failure_response("Netid field empty", 400)
-    new_user = User(name = name,netid=netid)
-    db.session.add(new_user)
+    sender_id = body.get("sender_id")
+    receiver_id = body.get("receiver_id")
+    note = body.get("note")
+    if note is None:
+        return failure_response("Note field is empty.")
+    new_noti = Notifications(note=note)
+    db.session.add(new_noti)
     db.session.commit()
-    return success_response(new_user.serialize(), 201)
+    return success_response(new_noti.serialize(), 201)
 
 @app.route("/api/users/<int:user_id>/")
 def get_user(user_id):
@@ -110,6 +108,18 @@ def get_user(user_id):
     user = User.query.filter_by(id=user_id).first()
     if user is None:
         return failure_response("User not found")
+    return success_response(user.serialize())
+
+@app.route("/api/users/<int:user_id>/", methods=["DELETE"])
+def del_user(user_id):
+    """
+    Endpoint for deleting a user
+    """
+    user = User.query.filter_by(id=user_id).first()
+    if user is None:
+        return failure_response("User not found")
+    db.session.delete(user)
+    db.session.commit()
     return success_response(user.serialize())
 
 @app.route("/api/courses/<int:course_id>/add/", methods=["POST"])
@@ -140,30 +150,6 @@ def add_user_to_course(course_id):
         return failure_response("Invalid Type field", 400)
     db.session.commit()
     return success_response(course.serialize())
-    
-
-@app.route("/api/courses/<int:course_id>/assignment/", methods=["POST"])
-def make_assignment(course_id):
-    """
-    Endpoint for creating an assignment for a course by id
-    """
-    course = Course.query.filter_by(id=course_id).first()
-    if course is None:
-        return failure_response("Course not found")
-    body = json.loads(request.data)
-    title=body.get("title")
-    due_date=body.get("due_date")
-    if title is None:
-        return failure_response("Title field empty", 400)
-    if due_date is None:
-        return failure_response("Due Date field empty", 400)
-    new_assignment = Assignment(
-        title=title, 
-        due_date=due_date, 
-        course_id=course_id)
-    db.session.add(new_assignment)
-    db.session.commit()
-    return success_response(new_assignment.serialize(), 201)
 
 @app.route("/api/courses/<int:course_id>/drop/", methods=["POST"])
 def drop_user(course_id):
