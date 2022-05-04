@@ -100,7 +100,6 @@ Response
 
 #### Delete user
 ```DELETE /api/users/{id}/```
-
 ```
 Response
 <HTTP STATUS CODE 200>
@@ -114,6 +113,25 @@ Response
     "rate": "20 per hour"
 }
 ```
+### Availability Functions
+#### Add availability
+```POST /api/users/{id}/availability/```
+```
+Request
+<HTTP STATUS CODE 201>
+{
+    "time": <USER INPUT>
+}
+```
+```
+Response
+<HTTP STATUS CODE 201>
+{
+    "id": <ID>,
+    "time": <USER INPUT>
+}
+```
+
 ###  Course Functions
 #### Get all Courses
 ```GET /api/courses/```
