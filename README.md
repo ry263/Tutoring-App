@@ -14,13 +14,14 @@ Response
     "id": 1,
     "name": "Rachel Yue",
     "netid": "ry263",
-    "courses": [ <SERIALIZED COURSES>, ... ],
-    "availability": [ <SERIALIZED TIMES>, ... ]
+    "courses": [ <SERIALIZED COURSES WITHOUT USERS>, ... ],
+    "availability": [ <SERIALIZED TIMES>, ... ],
+    "notifications": [ <SERIALIZED NOTIFICATIONS>, ... ]
 }
 ```
 
 ### Get all users
-##### GET /api/users/
+```GET /api/users/```
 ```
 Response
 <HTTP STATUS CODE 200>
@@ -30,22 +31,24 @@ Response
             "id": 1,
             "name": "Rachel Yue",
             "netid": "ry263",
-            "courses": [ <SERIALIZED COURSES>, ... ],
-            "availability": [ <SERIALIZED TIMES>, ... ]
+            "courses": [ <SERIALIZED COURSES WITHOUT USERS>, ... ],
+            "availability": [ <SERIALIZED TIMES>, ... ],
+            "notifications": [ <SERIALIZED NOTIFICATIONS>, ... ]
         },
         {
             "id": 2,
             "name": "Luk Man",
             "netid": "lm1",
-            "courses": [ <SERIALIZED COURSES>, ... ],
-            "availability": [ <SERIALIZED TIMES>, ... ]
+            "courses": [ <SERIALIZED COURSES WITHOUT USERS>, ... ],
+            "availability": [ <SERIALIZED TIMES>, ... ],
+            "notifications": [ <SERIALIZED NOTIFICATIONS>, ... ]
         }
     ]
 }
 ```
 
 ### Get current user
-##### GET /api/users/current/
+```GET /api/users/current/```
 ```
 Response
 <HTTP STATUS CODE 200>
@@ -53,13 +56,14 @@ Response
     "id": 1,
     "name": "Rachel Yue",
     "netid": "ry263",
-    "courses": [ <SERIALIZED COURSES>, ... ],
-    "availability": [ <SERIALIZED TIMES>, ... ]
+    "courses": [ <SERIALIZED COURSES WITHOUT USERS>, ... ],
+    "availability": [ <SERIALIZED TIMES>, ... ],
+    "notifications": [ <SERIALIZED NOTIFICATIONS>, ... ]
 }
 ```
 
 ### Create user
-##### GET /api/users/
+```GET /api/users/```
 ```
 Response
 <HTTP STATUS CODE 200>
@@ -67,13 +71,14 @@ Response
     "id": 1,
     "name": "Rachel Yue",
     "netid": "ry263",
-    "courses": [ <SERIALIZED COURSES>, ... ],
-    "availability": [ <SERIALIZED TIMES>, ... ]
+    "courses": [ <SERIALIZED COURSES WITHOUT USERS>, ... ],
+    "availability": [ <SERIALIZED TIMES>, ... ],
+    "notifications": [ <SERIALIZED NOTIFICATIONS>, ... ]
 }
 ```
 
 ### Get specific user
-##### GET /api/users/{id}/
+```GET /api/users/{id}/```
 ```
 Response
 <HTTP STATUS CODE 200>
@@ -81,13 +86,14 @@ Response
     "id": 1,
     "name": "Rachel Yue",
     "netid": "ry263",
-    "courses": [ <SERIALIZED COURSES>, ... ],
-    "availability": [ <SERIALIZED TIMES>, ... ]
+    "courses": [ <SERIALIZED COURSES WITHOUT USERS>, ... ],
+    "availability": [ <SERIALIZED TIMES>, ... ],
+    "notifications": [ <SERIALIZED NOTIFICATIONS>, ... ]
 }
 ```
 
 ### Delete user
-##### DELETE /api/users/{id}/
+```DELETE /api/users/{id}/```
 
 ```
 Response
@@ -96,7 +102,8 @@ Response
     "id": 1,
     "name": "Rachel Yue",
     "netid": "ry263",
-    "courses": [ <SERIALIZED COURSES>, ... ],
-    "availability": [ <SERIALIZED TIMES>, ... ]
+    "courses": [ <SERIALIZED COURSES WITHOUT USERS>, ... ],
+    "availability": [ <SERIALIZED TIMES>, ... ],
+    "notifications": [ <SERIALIZED NOTIFICATIONS>, ... ]
 }
 ```
