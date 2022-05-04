@@ -106,7 +106,6 @@ class User(db.Model):
             "id": self.id,               
             "name": self.name,    
             "netid": self.netid,
-            "availabiltiy": [a.serialize_nc() for a in self.availability],
             "rate":self.rate
         }
     
