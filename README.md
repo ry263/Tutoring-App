@@ -2,10 +2,10 @@
 
 
 
-# API Specification
-## Expected Functionality
+## Backend API Specification
+### Expected Functionality
 
-### Login
+#### Login
 ```GET /```
 ```
 Response
@@ -20,7 +20,7 @@ Response
 }
 ```
 
-### Get all users
+#### Get all users
 ```GET /api/users/```
 ```
 Response
@@ -47,7 +47,7 @@ Response
 }
 ```
 
-### Get current user
+#### Get current user
 ```GET /api/users/current/```
 ```
 Response
@@ -62,7 +62,7 @@ Response
 }
 ```
 
-### Create user
+#### Create user
 ```GET /api/users/```
 ```
 Response
@@ -77,7 +77,7 @@ Response
 }
 ```
 
-### Get specific user
+#### Get specific user
 ```GET /api/users/{id}/```
 ```
 Response
@@ -92,7 +92,7 @@ Response
 }
 ```
 
-### Delete user
+#### Delete user
 ```DELETE /api/users/{id}/```
 
 ```
