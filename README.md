@@ -135,7 +135,8 @@ Response
 <HTTP STATUS CODE 201>
 {
     "id": <ID>,
-    "time": <USER INPUT>
+    "time": <USER INPUT>,
+    "user_id": <id>
 }
 ```
 
