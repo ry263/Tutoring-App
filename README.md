@@ -13,7 +13,6 @@ Response
 {
     "id": 1,
     "name": "Rachel Yue",
-    "netid": "ry263",
     "email": "ry263@cornell.edu",
     "profile_pic": "url for profile pic",
     "courses": [ <SERIALIZED COURSES WITHOUT USERS>, ... ],
@@ -33,7 +32,6 @@ Response
         {
             "id": 1,
             "name": "Rachel Yue",
-            "netid": "ry263",
             "email": "ry263@cornell.edu",
             "profile_pic": "url for profile pic",
             "courses": [ <SERIALIZED COURSES WITHOUT USERS>, ... ],
@@ -44,7 +42,6 @@ Response
         {
             "id": 2,
             "name": "Luk Man",
-            "netid": "lm1",
             "email": "ry263@cornell.edu",
             "profile_pic": "url for profile pic",
             "courses": [ <SERIALIZED COURSES WITHOUT USERS>, ... ],
@@ -64,7 +61,6 @@ Response
 {
     "id": 1,
     "name": "Rachel Yue",
-    "netid": "ry263",
     "email": "ry263@cornell.edu",
     "profile_pic": "url for profile pic",
     "courses": [ <SERIALIZED COURSES WITHOUT USERS>, ... ],
@@ -82,7 +78,6 @@ Response
 {
     "id": 1,
     "name": "Rachel Yue",
-    "netid": "ry263",
     "email": "ry263@cornell.edu",
     "profile_pic": "url for profile pic",
     "courses": [ <SERIALIZED COURSES WITHOUT USERS>, ... ],
@@ -100,7 +95,6 @@ Response
 {
     "id": 1,
     "name": "Rachel Yue",
-    "netid": "ry263",
     "email": "ry263@cornell.edu",
     "profile_pic": "url for profile pic",
     "courses": [ <SERIALIZED COURSES WITHOUT USERS>, ... ],
@@ -118,7 +112,6 @@ Response
 {
     "id": 1,
     "name": "Rachel Yue",
-    "netid": "ry263",
     "email": "ry263@cornell.edu",
     "profile_pic": "url for profile pic",
     "courses": [ <SERIALIZED COURSES WITHOUT USERS>, ... ],
