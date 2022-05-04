@@ -3,7 +3,7 @@
 
 
 ## Backend API Specification
-### Expected Functionality
+###  User Functions
 
 #### Login
 ```GET /```
@@ -114,14 +114,47 @@ Response
     "rate": "20 per hour"
 }
 ```
+###  Course Functions
+#### Get all Courses
+```GET /api/courses/```
+```
+Response
+<HTTP STATUS CODE 200>
+{
+    "notifications" : [
+        {
+            "id": 1,
+            "code": "CS 1110",
+            "tutors": [<SERIALIZED USERS WITHOUT COURSES>, ...]
+        },
+        {
+            "id": 2,
+            "code": "CS 2110",
+            "tutors": [<SERIALIZED USERS WITHOUT COURSES>, ...]
+        }
+    ]
+}
+```
+#### Get course by code
+```GET /api/courses/{code}```
+```
+Response
+<HTTP STATUS CODE 200>
+{
+    "id": 1,
+    "code": "CS 1110",
+    "tutors": [<SERIALIZED USERS WITHOUT COURSES>, ...]
+}
+```
 
+###  Notification Functions
 #### Get all notifications
 ```GET /api/notifications/```
 ```
 Response
 <HTTP STATUS CODE 200>
 {
-    "notifications" : [
+    "courses" : [
         {
             "id": 1,
             "sender_id": 3,
