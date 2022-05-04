@@ -6,7 +6,7 @@
 ## Expected Functionality
 
 ### Login
-##### GET /
+```GET /```
 ```
 Response
 <HTTP STATUS CODE 201>
