@@ -225,6 +225,7 @@ def add_availablility(user_id):
 
     return success_response(new_av.serialize_nc, 201)
 
+@app.route("/api/allcourses/", methods=["POST"])
 def fill_courses():
     subjects = request.get("https://classes.cornell.edu/api/2.0/config/subjects.json?roster=SP22")
     course_codes = subjects.get("value")
@@ -233,6 +234,7 @@ def fill_courses():
         classnbr = cs.get("catalogNBR")
         new_course = Course(code = classnbr)
         db.session.add(new_course)
+        db.session.commit()
 
 
 
