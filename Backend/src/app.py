@@ -21,16 +21,56 @@ from flask_login import (
 )
 from loguru import logger
 
-app = Flask(__name__)
-db_filename = "cms.db"
+#from https://stackoverflow.com/questions/14810795/flask-url-for-generating-http-url-instead-of-https/37842465#37842465
+class ReverseProxied(object):
+    def __init__(self, app):
+        self.app = app
 
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///%s" % db_filename
+    def __call__(self, environ, start_response):
+        environ["wsgi.url_scheme"] = "https"
+        return self.app(environ, start_response)
+#---------------------------------------------------------------------------------------------------------------------
+
+# define db filename
+db_filename = "tutoring_app.db"
+app = Flask(__name__)
+app.wsgi_app = ReverseProxied(app.wsgi_app)
+
+app.secret_key = os.urandom(24)
+
+# setup config
+app.config["SQLALCHEMY_DATABASE_URI"] = f"sqlite:///{db_filename}"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config["SQLALCHEMY_ECHO"] = True
 
+#Google login
+GOOGLE_CLIENT_ID = os.environ.get("GOOGLE_CLIENT_ID", None)
+GOOGLE_CLIENT_SECRET = os.environ.get("GOOGLE_CLIENT_SECRET", None)
+GOOGLE_DISCOVERY_URL = ("https://accounts.google.com/.well-known/openid-configuration")
+
+#login manager to get current user
+login_manager = LoginManager()
+login_manager.init_app(app)
+
+# initialize app
 db.init_app(app)
 with app.app_context():
     db.create_all()
+
+# OAuth 2 client setup
+client = WebApplicationClient(GOOGLE_CLIENT_ID)
+
+def get_google_provider_cfg():
+    return requests.get(GOOGLE_DISCOVERY_URL).json()
+
+@login_manager.user_loader
+def get_user(user_id):
+    user = User.query.filter_by(id=user_id).first()
+    if user is None:
+        return failure_response('User not found')
+    else:
+        return user
+
 
 
 # your routes here
@@ -43,6 +83,15 @@ def success_response(data, code=200):
 def failure_response(message, code=404):
     return json.dumps({"error": message}), code
     #return json.dumps({"success": False, "error": message}), code
+
+def logged_in(user):
+    try:
+        user.serialize()
+        return True
+    except AttributeError:
+        return False
+
+
 
 @app.route("/")
 
