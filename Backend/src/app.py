@@ -92,7 +92,7 @@ def logged_in(user):
         return False
 
 
-
+#change after google server number
 @app.route("/")
 def login():
     #google_provider_cfg = get_google_provider_cfg()
