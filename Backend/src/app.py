@@ -108,17 +108,26 @@ def create_notifications():
     note = body.get("note")
     if note is None:
         return failure_response("Note field is empty.")
-    
-    if sender_id is not None and receiver_id is not None:
-        noti = Notification(note=note)
-    else:
-        return failure_response("SENDER ID or RECEIVER ID is empty.")
     new_noti = Notification(note=note,
     sender_id = sender_id,
     receiver_id = receiver_id)
+    if sender_id is None and receiver_id is None:
+        return failure_response("SENDER ID or RECEIVER ID is empty.")
     db.session.add(new_noti)
     db.session.commit()
     return success_response(new_noti.serialize(), 201)
+
+@app.route("/api/users/notifications/<int:user_id>")
+def get_notifications_for_user(user_id):
+    """
+    Endpoint for getting a specific users notifications
+    """
+
+    user = User.query.filter_by(id=user_id).first()
+    if user is None:
+        return failure_response("User not found")
+    return success_response({"notifications": [n.serialize for n in user.notifications]})
+
 
 @app.route("/api/users/<int:user_id>/")
 def get_user(user_id):

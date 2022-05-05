@@ -69,6 +69,8 @@ class User(db.Model):
     netid = db.Column(db.String, nullable=False)
     icourses = db.relationship("Course", secondary=ins_assoc_table, back_populates="instructors")
     availability = db.relationship("Availability", cascade = "delete")
+    notifications = db.relationship("Notification", cascade = "delete")
+
     rate = db.Column(db.String, nullable=False)
     
     #scourses = db.relationship("Course", secondary=stu_assoc_table, back_populates="students")
@@ -104,7 +106,6 @@ class User(db.Model):
             "id": self.id,               
             "name": self.name,    
             "netid": self.netid,
-            "availabiltiy": [a.serialize_nc() for a in self.availability],
             "rate":self.rate
         }
     
@@ -150,12 +151,18 @@ class Notification(db.model):
     __tablename__ = "notifications"
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     note = db.Column(db.String, nullable=False)
+    sender_id = db.Column(db.Integer, nullable = False)
+    receiver_id = db.Column(db.Integer, db.ForeignKey("user.id"),nullable=False)
+
+
 
     def __init__(self, **kwargs):
         """
         Initializes Notification object
         """
         self.note = kwargs.get("note", "")
+        self.sender_id = kwargs.get("sender_id", "")
+        self.receiver_id = kwargs.get("receiver_id", "")
     
     def serialize(self):   
         """
@@ -163,6 +170,8 @@ class Notification(db.model):
         """ 
         return {        
             "id": self.id,               
-            "note": self.note
+            "note": self.note,
+            "sender_id": self.sender_id,
+            "receiver_id": self.receiver_id
         }
         
