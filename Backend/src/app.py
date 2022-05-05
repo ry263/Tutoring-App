@@ -70,12 +70,19 @@ def make_course():
     db.session.commit()
     return success_response(new_course.serialize(), 201)
 
-@app.route("/api/courses/<int:code>/")
+@app.route("/api/courses/<string:code>/")
 def get_course(code):
     """
     Endpoint for getting a course by code
     """
-    course = Course.query.filter_by(code=code).first()
+    code.strip()
+    code.replace("-"," ")
+    code.replace("_"," ")
+    x = code.index(" ")
+    space = (code.length() - 5)
+    if (x != space):
+        parsed_code = code[:space] + " " + code[space:]
+    course = Course.query.filter_by(code=parsed_code).first()
     if course is None:
         return failure_response("Course not found")
     return success_response(course.serialize())
