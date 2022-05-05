@@ -29,7 +29,7 @@ class Course(db.Model):
     code = db.Column(db.String, nullable=False)
     #name = db.Column(db.String, nullable=False)
     #assignments = db.relationship("Assignment", cascade="delete")
-    instructors = db.relationship("User", secondary=ins_assoc_table, back_populates="icourses")
+    tutors = db.relationship("User", secondary=ins_assoc_table, back_populates="teaching")
     #students = db.relationship("User", secondary=stu_assoc_table, back_populates="scourses")
 
     def __init__(self, **kwargs):
@@ -46,7 +46,7 @@ class Course(db.Model):
         return {        
             "id": self.id,        
             "code": self.code,        
-            "tutors": [i.serialize_nc() for i in self.instructors]
+            "tutors": [t.serialize_nc() for t in self.tutors]
         }
 
     def serialize_nc(self):   
@@ -65,22 +65,18 @@ class User(db.Model):
     __tablename__ = "users"    
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)    
     name = db.Column(db.String, nullable=False)
-    #year = db.Column(db.String, nullable=False)
-    netid = db.Column(db.String, nullable=False)
-    icourses = db.relationship("Course", secondary=ins_assoc_table, back_populates="instructors")
+    email = db.Column(db.String, nullable=False)
+    teaching = db.relationship("Course", secondary=ins_assoc_table, back_populates="instructors")
     availability = db.relationship("Availability", cascade = "delete")
     notifications = db.relationship("Notification", cascade = "delete")
-
     rate = db.Column(db.String, nullable=True)
-    
-    #scourses = db.relationship("Course", secondary=stu_assoc_table, back_populates="students")
 
     def __init__(self, **kwargs):
         """
         Initializes User object
         """
         self.name = kwargs.get("name", "")
-        self.netid = kwargs.get("netid", "")
+        self.email = kwargs.get("email", "")
 
     def serialize(self):   
         """
@@ -89,9 +85,9 @@ class User(db.Model):
         return {        
             "id": self.id,               
             "name": self.name,    
-            "netid": self.netid,
-            "courses": ([c.serialize_nc() for c in self.icourses]),
-            "availabiltiy": [a.serialize_nc() for a in self.availability],
+            "email": self.email,
+            "courses": [c.serialize_nc() for c in self.teaching],
+            "availability": [a.serialize_nc() for a in self.availability],
             "rate": self.rate
 
             #+ [c.serialize_nc() for c in self.scourses])
@@ -105,7 +101,7 @@ class User(db.Model):
         return {        
             "id": self.id,               
             "name": self.name,    
-            "netid": self.netid,
+            "email": self.email,
             "rate":self.rate
         }
     
