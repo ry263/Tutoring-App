@@ -19,7 +19,6 @@ from flask_login import (
     logout_user,
     UserMixin
 )
-from loguru import logger
 
 #from https://stackoverflow.com/questions/14810795/flask-url-for-generating-http-url-instead-of-https/37842465#37842465
 class ReverseProxied(object):
