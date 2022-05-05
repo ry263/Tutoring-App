@@ -232,7 +232,7 @@ def fill_courses():
     for code in course_codes:
         cs = request.get("https://classes.cornell.edu/api/2.0/search/classes.json?roster=FA14&subject=%s" % code)
         classnbr = cs.get("catalogNBR")
-        new_course = Course(code = classnbr)
+        new_course = Course(code = code+ " "+  classnbr)
         db.session.add(new_course)
         db.session.commit()
 
