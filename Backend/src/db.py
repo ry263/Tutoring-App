@@ -1,6 +1,17 @@
 from tokenize import String
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import Integer
+from flask_login import UserMixin
+import base64
+import boto3
+import datetime
+from io import BytesIO
+from mimetypes import guess_extension, guess_type
+import os
+from PIL import Image
+import random
+import re
+import string
 
 db = SQLAlchemy()
 
@@ -58,7 +69,7 @@ class Course(db.Model):
             "code": self.code 
         }
     
-class User(db.Model):  
+class User(db.Model, UserMixin):  
     """
     User model
     """  
