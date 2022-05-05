@@ -71,7 +71,7 @@ class User(db.Model):
     availability = db.relationship("Availability", cascade = "delete")
     notifications = db.relationship("Notification", cascade = "delete")
 
-    rate = db.Column(db.String, nullable=False)
+    rate = db.Column(db.String, nullable=True)
     
     #scourses = db.relationship("Course", secondary=stu_assoc_table, back_populates="students")
 
