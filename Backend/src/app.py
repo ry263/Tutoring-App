@@ -94,6 +94,57 @@ def logged_in(user):
 
 
 @app.route("/")
+def login():
+    #google_provider_cfg = get_google_provider_cfg()
+    authorization_endpoint = "https://accounts.google.com/o/oauth2/v2/auth"
+    request_uri = client.prepare_request_uri(
+        authorization_endpoint,
+        redirect_uri="https://bear-market.herokuapp.com/callback",
+        scope=["openid", "email", "profile"],
+    )
+    return redirect(request_uri)
+
+@app.route("/callback")
+def callback():
+    code = request.args.get("code")
+    google_provider_cfg = get_google_provider_cfg()
+    token_endpoint = google_provider_cfg["token_endpoint"]
+    token_url, headers, body = client.prepare_token_request(
+        token_endpoint,
+        authorization_response=request.url,
+        redirect_url=request.base_url,
+        code=code
+    )
+    token_response = requests.post(
+        token_url,
+        headers=headers,
+        data=body,
+        auth=(GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET),
+    )
+    client.parse_request_body_response(json.dumps(token_response.json()))
+    userinfo_endpoint = google_provider_cfg["userinfo_endpoint"]
+    uri, headers, body = client.add_token(userinfo_endpoint)
+    userinfo_response = requests.get(uri, headers=headers, data=body)
+    if userinfo_response.json().get("email_verified"):
+        unique_id = userinfo_response.json()["sub"]
+        users_email = userinfo_response.json()["email"]
+        picture = userinfo_response.json()["picture"]
+        users_name = userinfo_response.json()["given_name"] + " " + userinfo_response.json()["family_name"]
+    else:
+        return failure_response('Email not authenticated by Google')
+    user = User.query.filter_by(id=unique_id).first()
+    if user is None:
+        user = User(id=unique_id, name=users_name, email=users_email, profile_pic=picture)
+    db.session.add(user)
+    db.session.commit()
+    login_user(user)
+    return success_response(user.serialize(), 201)
+#-------------------------------------------------------------------------------------------------
+
+@app.route("/logout/", methods=["GET"])
+def logout():
+    logout_user()
+    return success_response("User logged out")
 
 @app.route("/api/courses/")
 def get_courses():
