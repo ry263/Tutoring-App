@@ -20,7 +20,7 @@ from flask_login import (
     UserMixin
 )
 
-#from https://stackoverflow.com/questions/14810795/flask-url-for-generating-http-url-instead-of-https/37842465#37842465
+#from https://realpython.com/flask-google-login/#creating-your-own-web-application
 class ReverseProxied(object):
     def __init__(self, app):
         self.app = app
@@ -92,7 +92,7 @@ def logged_in(user):
 
 
 #change after google server number
-@app.route("/")
+@app.route(("/"), methods=["POST"])
 def login():
     #google_provider_cfg = get_google_provider_cfg()
     authorization_endpoint = "https://accounts.google.com/o/oauth2/v2/auth"
