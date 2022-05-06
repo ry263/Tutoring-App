@@ -111,7 +111,7 @@ class User(db.Model, UserMixin):
             "rate":self.rate
         }
     
-class Availability(db.model):
+class Availability(db.Model):
     """
     Availability model
     """
