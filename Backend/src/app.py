@@ -321,11 +321,11 @@ def add_availablility(user_id):
 
 @app.route("/api/allcourses/", methods=["POST"])
 def fill_courses():
-    subjects = request.get("https://classes.cornell.edu/api/2.0/config/subjects.json?roster=SP22")
-    course_codes = subjects.get("value")
+    subjects = requests.get("https://classes.cornell.edu/api/2.0/config/subjects.json?roster=SP22")
+    course_codes = subjects.json().get("value")
     for code in course_codes:
-        cs = request.get("https://classes.cornell.edu/api/2.0/search/classes.json?roster=FA14&subject=%s" % code)
-        classnbr = cs.get("catalogNBR")
+        cs = requests.get("https://classes.cornell.edu/api/2.0/search/classes.json?roster=FA14&subject=%s" % code)
+        classnbr = cs.json().get("catalogNBR")
         new_course = Course(code = code+ " "+  classnbr)
         db.session.add(new_course)
         db.session.commit()
@@ -344,8 +344,8 @@ def add_rate(user_id):
     db.session.commit()
     return success_response(user.serialize())
 
-@app.route("/api/users/<int:user_id>/availability/", methods = ["DELETE"])
-def delete_availability(user_id):
+@app.route("/api/users/<int:user_id>/availability/<int:post_id>/", methods = ["DELETE"])
+def delete_availability(user_id,post_id):
     user = User.query.filter_by(id=user_id).first()
     if user is None:
         return failure_response("User not found!")

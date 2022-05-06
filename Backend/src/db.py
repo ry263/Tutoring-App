@@ -8,8 +8,8 @@ db = SQLAlchemy()
 
 ins_assoc_table = db.Table(
     "course_ins_assoc",
-    db.Column("course_id", db.Integer, db.ForeignKey("courses.id")),
-    db.Column("tutor_id", db.Integer, db.ForeignKey("users.id"))
+    db.Column("course_id", db.Integer, db.ForeignKey("course.id")),
+    db.Column("tutor_id", db.Integer, db.ForeignKey("user.id"))
 )
 
 """time_assoc_table = db.Table(
@@ -26,7 +26,7 @@ class Course(db.Model):
     Course model
     Has a many-to-many relationship with the User model
     """
-    __tablename__ = "courses"    
+    __tablename__ = "course"    
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)    
     code = db.Column(db.String, nullable=False)
     #name = db.Column(db.String, nullable=False)
@@ -64,7 +64,7 @@ class User(db.Model, UserMixin):
     """
     User model
     """  
-    __tablename__ = "users"    
+    __tablename__ = "user"    
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)    
     name = db.Column(db.String, nullable=False)
     email = db.Column(db.String, nullable=False)
