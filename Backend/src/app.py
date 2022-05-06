@@ -98,7 +98,7 @@ def login():
     authorization_endpoint = "https://accounts.google.com/o/oauth2/v2/auth"
     request_uri = client.prepare_request_uri(
         authorization_endpoint,
-        redirect_uri="https://bear-market.herokuapp.com/callback",
+        redirect_uri="https://34.130.13.109/callback",
         scope=["openid", "email", "profile"],
     )
     return redirect(request_uri)
