@@ -146,13 +146,13 @@ class Availability(db.Model):
             "user_id":self.user_id 
         }
 
-class Notification(db.model):
+class Notification(db.Model):
     """
     Notification model
     """
     __tablename__ = "notifications"
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    sender_id = db.Column(db.Integer, nullable = False)
+    sender_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable = False)
     receiver_id = db.Column(db.Integer, db.ForeignKey("user.id"),nullable=False)
     time = db.Column(db.DateTime)
 
