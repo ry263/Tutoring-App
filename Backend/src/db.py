@@ -60,7 +60,7 @@ class Course(db.Model):
             "code": self.code 
         }
     
-class User(db.Model, UserMixin):  
+class User(db.Model):  
     """
     User model
     """  
@@ -80,7 +80,7 @@ class User(db.Model, UserMixin):
         """
         self.name = kwargs.get("name", "")
         self.email = kwargs.get("email", "")
-        self.profile_pic = kwargs.get("profile_pic")
+        #self.profile_pic = kwargs.get("profile_pic")
 
     def serialize(self):   
         """
