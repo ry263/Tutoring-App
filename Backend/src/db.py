@@ -92,7 +92,7 @@ class User(db.Model, UserMixin):
             "image":self.profile_pic,   
             "email": self.email,
             "courses": [c.serialize_nc() for c in self.teaching],
-            "availability": [a.serialize_nc() for a in self.availability],
+            "availability": [a.serialize() for a in self.availability],
             "rate": self.rate
             
 
