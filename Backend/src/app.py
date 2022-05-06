@@ -282,7 +282,7 @@ def drop_user(course_id):
         return failure_response("Course not found")
     body = json.loads(request.data)
     user_id = body.get("user_id")
-    user = Course.query.filter_by(id=user_id).first()
+    user = User.query.filter_by(id=user_id).first()
     if user is None:
         return failure_response("User not found")
     #check user in lists
