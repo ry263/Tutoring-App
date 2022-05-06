@@ -19,7 +19,6 @@ from flask_login import (
     logout_user,
     UserMixin
 )
-from loguru import logger
 
 #from https://stackoverflow.com/questions/14810795/flask-url-for-generating-http-url-instead-of-https/37842465#37842465
 class ReverseProxied(object):
@@ -92,7 +91,7 @@ def logged_in(user):
         return False
 
 
-
+#change after google server number
 @app.route("/")
 def login():
     #google_provider_cfg = get_google_provider_cfg()
@@ -187,6 +186,7 @@ def get_course(code):
         return failure_response("Course not found")
     return success_response(course.serialize())
 
+
 @app.route("/api/notifications/")
 def get_notifications():
     """
@@ -212,10 +212,7 @@ def create_notifications():
     body = json.loads(request.data)
     sender_id = body.get("sender_id")
     receiver_id = body.get("receiver_id")
-    note = body.get("note")
-    if note is None:
-        return failure_response("Note field is empty.")
-    new_noti = Notification(note=note,
+    new_noti = Notification(
     sender_id = sender_id,
     receiver_id = receiver_id)
     if sender_id is None and receiver_id is None:
@@ -234,7 +231,6 @@ def get_notifications_for_user(user_id):
     if user is None:
         return failure_response("User not found")
     return success_response({"notifications": [n.serialize for n in user.notifications]})
-
 
 @app.route("/api/users/<int:user_id>/")
 def get_user(user_id):
@@ -269,21 +265,13 @@ def add_user_to_course(course_id):
         return failure_response("Course not found")
     body = json.loads(request.data)
     user_id=body.get("user_id")
-    t=body.get("type")
     if user_id is None:
         return failure_response("User ID field empty", 400)
-    if t is None:
-        return failure_response("Type field empty", 400)
     user = User.query.filter_by(id=user_id).first()
     if user is None:
         return failure_response("User not found")
-    #add user
-    if t=="student":
-        course.students.append(user)
-    elif t=="instructor":
-        course.instructors.append(user)
-    else:
-        return failure_response("Invalid Type field", 400)
+    #add user   
+    course.instructors.append(user)
     db.session.commit()
     return success_response(course.serialize())
 
@@ -298,9 +286,8 @@ def drop_user(course_id):
     if user is None:
         return failure_response("User not found")
     #check user in lists
-    if user in course.students:
-        course.students.remove(user)
-    elif user in course.instructors:
+
+    if user in course.instructors:
         course.instructors.remove(user)
     else:
         return failure_response("User has not been added to this course")
@@ -343,6 +330,20 @@ def fill_courses():
         db.session.add(new_course)
         db.session.commit()
 
+@app.route("/api/rate/<int:user_id>/", methods =["POST"])
+def add_rate(user_id):
+    user = User.query.filter_by(id=user_id).first()
+    if user is None:
+        return failure_response("User not found!")
+    body = json.loads(request.data)
+    rate  = body.get("rate")
+    if rate == None:
+        return failure_response("invalid rate", 400)
+    user.rate = rate
+    db.session.commit()
+
+
+    
 
 
 

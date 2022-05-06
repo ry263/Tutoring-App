@@ -122,7 +122,7 @@ Response
 ```
 ### Availability Functions
 #### Add availability
-```POST /api/users/{id}/availability/```
+```POST /api/users/{user_id}/availability/```
 ```
 Request
 <HTTP STATUS CODE 201>
@@ -147,7 +147,7 @@ Response
 Response
 <HTTP STATUS CODE 200>
 {
-    "notifications" : [
+    "courses" : [
         {
             "id": 1,
             "code": "CS 1110",
@@ -162,7 +162,7 @@ Response
 }
 ```
 #### Get course by code
-```GET /api/courses/{code}```
+```GET /api/courses/{string(code)}```
 ```
 Response
 <HTTP STATUS CODE 200>
@@ -216,8 +216,7 @@ Response
 Request
 {
     "sender_id": <USER INPUT>,
-    "receiver_id": <USER INPUT>,
-    "note": <USER INPUT>
+    "receiver_id": <USER INPUT>
 }
 ```
 ```
@@ -226,18 +225,8 @@ Response
 {
     "id": <ID>,
     "sender_id": <USER INPUT FOR SENDER ID>,
-    "receiver_id": <USER INPUT FOR RECEIVER ID>,
-    "note": <USER INPUT FOR NOTE>
+    "receiver_id": <USER INPUT FOR RECEIVER ID>
 }
 ```
 
-#### Delete notification
-```DELETE /api/notifications/{id}```
-```
-Response
-<HTTP STATUS CODE 200>
-{
-    <DELETED NOTIFICATION>
-}
-```
-
+### 
