@@ -331,3 +331,16 @@ Response
 }
 ```
 
+### Delete a user's availibility
+```DELETE /api/users/{user_id}/availability/```
+```
+Response
+<HTTP STATUS CODE 201>
+{
+    "id": <ID>,
+    "sender_id": <USER INPUT FOR SENDER ID>,
+    "receiver_id": <USER INPUT FOR RECEIVER ID>
+}
+```
+
+

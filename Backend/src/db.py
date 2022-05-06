@@ -1,6 +1,6 @@
 from tokenize import String
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import Integer
+from sqlalchemy import Integer, DateTime
 from flask_login import UserMixin
 import base64
 import boto3
@@ -163,6 +163,7 @@ class Notification(db.model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     sender_id = db.Column(db.Integer, nullable = False)
     receiver_id = db.Column(db.Integer, db.ForeignKey("user.id"),nullable=False)
+    time = db.Column(db.DateTime)
 
 
 
@@ -172,6 +173,7 @@ class Notification(db.model):
         """
         self.sender_id = kwargs.get("sender_id", "")
         self.receiver_id = kwargs.get("receiver_id", "")
+        self.time = datetime.datetime.utcnow
     
     def serialize(self):   
         """
@@ -180,6 +182,7 @@ class Notification(db.model):
         return {        
             "id": self.id,              
             "sender_id": self.sender_id,
-            "receiver_id": self.receiver_id
+            "receiver_id": self.receiver_id,
+            "time": str(self.time)
         }
         

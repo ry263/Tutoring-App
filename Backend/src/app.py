@@ -226,11 +226,11 @@ def get_notifications_for_user(user_id):
     """
     Endpoint for getting a specific users notifications
     """
-
     user = User.query.filter_by(id=user_id).first()
     if user is None:
         return failure_response("User not found")
-    return success_response({"notifications": [n.serialize for n in user.notifications]})
+    notifications = Notification.query.filter_by(receiver_id=user_id).order_by(desc(Notification.time)).all()
+    return success_response({"notifications": [n.serialize for n in notifications]})
 
 @app.route("/api/users/<int:user_id>/")
 def get_user(user_id):
@@ -344,6 +344,23 @@ def add_rate(user_id):
     db.session.commit()
     return success_response(user.serialize())
 
+@app.route("/api/users/<int:user_id>/availability/", methods = ["DELETE"])
+def delete_availability(user_id):
+    user = User.query.filter_by(id=user_id).first()
+    if user is None:
+        return failure_response("User not found!")
+    body = json.loads(request.data)
+    time= body.get("time")
+    if time == None:
+        return failure_response("invalid request", 400)
+    for n in user.availability:
+        old_av = n.query.filter_by(time=time).first()
+    db.session.delete(old_av)
+    db.session.commit()
+    return success_response(old_av.serialize())
+    
+
+    
 
     
 
