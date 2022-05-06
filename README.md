@@ -4,6 +4,8 @@
 
 ## Backend API Specification
 ###  User Functions
+#### Register new user
+```POST /register/```
 
 #### Login
 ```GET /```
