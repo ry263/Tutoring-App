@@ -332,7 +332,7 @@ Response
 ```
 
 ### Delete a user's availibility
-```DELETE /api/users/{user_id}/availability/```
+```DELETE /api/users/{user_id}/availability/{availibility_id}/```
 ```
 Response
 <HTTP STATUS CODE 201>
@@ -342,5 +342,6 @@ Response
     "receiver_id": <USER INPUT FOR RECEIVER ID>
 }
 ```
+
 
 

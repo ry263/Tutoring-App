@@ -344,17 +344,13 @@ def add_rate(user_id):
     db.session.commit()
     return success_response(user.serialize())
 
-@app.route("/api/users/<int:user_id>/availability/<int:post_id>/", methods = ["DELETE"])
-def delete_availability(user_id,post_id):
+@app.route("/api/users/<int:user_id>/availability/<int:av_id>/", methods = ["DELETE"])
+def delete_availability(user_id,av_id):
     user = User.query.filter_by(id=user_id).first()
     if user is None:
         return failure_response("User not found!")
-    body = json.loads(request.data)
-    time= body.get("time")
-    if time == None:
-        return failure_response("invalid request", 400)
     for n in user.availability:
-        old_av = n.query.filter_by(time=time).first()
+        old_av = n.query.filter_by(id = av_id).first()
     db.session.delete(old_av)
     db.session.commit()
     return success_response(old_av.serialize())
