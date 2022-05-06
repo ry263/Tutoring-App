@@ -88,7 +88,7 @@ Response
 ```
 
 #### Get specific user
-```GET /api/users/{id}/```
+```GET /api/users/{user_id}/```
 ```
 Response
 <HTTP STATUS CODE 200>
@@ -105,7 +105,7 @@ Response
 ```
 
 #### Delete user
-```DELETE /api/users/{id}/```
+```DELETE /api/users/{user_id}/```
 ```
 Response
 <HTTP STATUS CODE 200>
@@ -198,7 +198,7 @@ Response
 ```
 
 #### Get notification by id
-```GET /api/notifications/{id}/```
+```GET /api/notifications/{notification_id}/```
 ```
 Response
 <HTTP STATUS CODE 200>
@@ -229,7 +229,7 @@ Response
 }
 ```
 
-### Get Notifications for specific user 
+### Get Notifications for a specific user 
 ```GET /api/users/notifications/{user_id}/```
 ```
 Response
@@ -264,7 +264,7 @@ Response
 }
 ```
 
-#### Add Tutor to course
+#### Drop Tutor from course
 ```POST /api/courses/{course_id}/drop/```
 ```
 Request
@@ -287,7 +287,7 @@ Response
 }
 ```
 
-### Prepoluate the courses table
+### Prepopulate the courses table(Must call at start of app)
 ```POST /api/allcourses/```
 ```
 Response
