@@ -271,7 +271,7 @@ def add_user_to_course(course_id):
     if user is None:
         return failure_response("User not found")
     #add user   
-    course.instructors.append(user)
+    course.tutors.append(user)
     db.session.commit()
     return success_response(course.serialize())
 
@@ -329,6 +329,7 @@ def fill_courses():
         new_course = Course(code = code+ " "+  classnbr)
         db.session.add(new_course)
         db.session.commit()
+    return success_response({"courses": [c.serialize() for c in Course.query.all()]})
 
 @app.route("/api/rate/<int:user_id>/", methods =["POST"])
 def add_rate(user_id):
@@ -341,6 +342,7 @@ def add_rate(user_id):
         return failure_response("invalid rate", 400)
     user.rate = rate
     db.session.commit()
+    return success_response(user.serialize())
 
 
     

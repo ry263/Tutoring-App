@@ -229,4 +229,105 @@ Response
 }
 ```
 
-### 
+### Get Notifications for specific user 
+```GET /api/users/notifications/{user_id}/```
+```
+Response
+<HTTP STATUS CODE 200>
+{
+    "notifications" : [
+        {        
+            "id": id,              
+            "sender_id": sender_id,
+            "receiver_id": receiver_id
+        }
+    ]
+
+}
+```
+
+#### Add Tutor to course
+```POST /api/courses/{course_id}/add/```
+```
+Request
+{
+     "user_id": <USER INPUT>
+}
+```
+```
+Response
+<HTTP STATUS CODE 200>
+{
+    "id": 1,
+    "code": "CS 1110",
+    "tutors": [<SERIALIZED USERS WITHOUT COURSES>, ...]
+}
+```
+
+#### Add Tutor to course
+```POST /api/courses/{course_id}/drop/```
+```
+Request
+{
+     "user_id": <USER INPUT>
+}
+```
+```
+Response
+<HTTP STATUS CODE 200>
+{
+    "id": 1,
+    "name": "Rachel Yue",
+    "email": "ry263@cornell.edu",
+    "profile_pic": "url for profile pic",
+    "courses": [ <SERIALIZED COURSES WITHOUT USERS>, ... ],
+    "availability": [ <SERIALIZED TIMES>, ... ],
+    "notifications": [ <SERIALIZED NOTIFICATIONS>, ... ],
+    "rate": "20 per hour"
+}
+```
+
+### Prepoluate the courses table
+```POST /api/allcourses/```
+```
+Response
+<HTTP STATUS CODE 200>
+{
+    "courses" : [
+        {
+            "id": 1,
+            "code": "CS 1110",
+            "tutors": [<SERIALIZED USERS WITHOUT COURSES>, ...]
+        },
+        {
+            "id": 2,
+            "code": "CS 2110",
+            "tutors": [<SERIALIZED USERS WITHOUT COURSES>, ...]
+        }
+    ]
+}
+```
+
+### Add rate to user
+```POST /api/rate/{user_id}```
+```
+Request
+{
+     "rate": <USER INPUT>
+}
+```
+```
+Response
+<HTTP STATUS CODE 200>
+{
+    "id": 1,
+    "name": "Rachel Yue",
+    "email": "ry263@cornell.edu",
+    "profile_pic": "url for profile pic",
+    "courses": [ <SERIALIZED COURSES WITHOUT USERS>, ... ],
+    "availability": [ <SERIALIZED TIMES>, ... ],
+    "notifications": [ <SERIALIZED NOTIFICATIONS>, ... ],
+    "rate": "20 per hour"
+}
+```
+
