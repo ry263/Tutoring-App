@@ -413,9 +413,7 @@ def drop_user(course_id):
 """
 @app.route("/users/current/")
 def get_current_user():  
-    """
-    Endpoint for getting current user
-    """
+    
     if logged_in(current_user) == True:
         return success_response(current_user.serialize())
     else:
