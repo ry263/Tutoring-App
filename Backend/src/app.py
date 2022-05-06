@@ -159,12 +159,9 @@ def make_course():
     """
     body = json.loads(request.data)
     code=body.get("code")
-    name=body.get("name")
     if code is None:
         return failure_response("Code field empty", 400)
-    if name is None:
-        return failure_response("Name field empty", 400)
-    new_course = Course(code=code, name=name)
+    new_course = Course(code=code)
     db.session.add(new_course)
     db.session.commit()
     return success_response(new_course.serialize(), 201)
@@ -277,6 +274,9 @@ def add_user_to_course(course_id):
 
 @app.route("/api/courses/<int:course_id>/drop/", methods=["POST"])
 def drop_user(course_id):
+    """
+    Endpoint for removing user from course
+    """
     course = Course.query.filter_by(id=course_id).first()
     if course is None:
         return failure_response("Course not found")
@@ -296,6 +296,9 @@ def drop_user(course_id):
 
 @app.route("/users/current/")
 def get_current_user():  
+    """
+    Endpoint for getting current user
+    """
     if logged_in(current_user) == True:
         return success_response(current_user.serialize())
     else:
@@ -303,6 +306,9 @@ def get_current_user():
 
 @app.route("/api/users/<int:user_id>/availability/", methods = ["POST"])
 def add_availablility(user_id):
+    """
+    Endpoint for adding availability
+    """
     user = User.query.filter_by(id=user_id).first()
     if user is None:
         return failure_response("User not found!")
@@ -316,11 +322,13 @@ def add_availablility(user_id):
     )
     db.session.add(new_av)
     db.session.commit()
-
     return success_response(new_av.serialize_nc, 201)
 
 @app.route("/api/allcourses/", methods=["POST"])
 def fill_courses():
+    """
+    Endpoint for filling courses
+    """
     subjects = requests.get("https://classes.cornell.edu/api/2.0/config/subjects.json?roster=SP22")
     course_codes = subjects.json().get("value")
     for code in course_codes:
@@ -333,6 +341,9 @@ def fill_courses():
 
 @app.route("/api/rate/<int:user_id>/", methods =["POST"])
 def add_rate(user_id):
+    """
+    Endpoint for changing rate
+    """
     user = User.query.filter_by(id=user_id).first()
     if user is None:
         return failure_response("User not found!")
@@ -346,6 +357,9 @@ def add_rate(user_id):
 
 @app.route("/api/users/<int:user_id>/availability/<int:av_id>/", methods = ["DELETE"])
 def delete_availability(user_id,av_id):
+    """
+    Endpoint for deleting availability
+    """
     user = User.query.filter_by(id=user_id).first()
     if user is None:
         return failure_response("User not found!")

@@ -39,7 +39,7 @@ class Course(db.Model):
         initialize Course object
         """
         self.code = kwargs.get("code", "")
-        self.name = kwargs.get("name", "")
+        #self.name = kwargs.get("name", "")
 
     def serialize(self):   
         """
@@ -152,9 +152,9 @@ class Notification(db.Model):
     """
     __tablename__ = "notifications"
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    sender_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable = False)
+    sender_id = db.Column(db.Integer, nullable = False)
     receiver_id = db.Column(db.Integer, db.ForeignKey("user.id"),nullable=False)
-    time = db.Column(db.DateTime)
+    time = db.Column(db.DateTime, nullable=False)
 
 
 
