@@ -7,7 +7,7 @@ db = SQLAlchemy()
 ins_assoc_table = db.Table(
     "course_ins_assoc",
     db.Column("course_id", db.Integer, db.ForeignKey("courses.id")),
-    db.Column("instructor_id", db.Integer, db.ForeignKey("users.id"))
+    db.Column("tutor_id", db.Integer, db.ForeignKey("users.id"))
 )
 
 time_assoc_table = db.Table(
@@ -66,7 +66,7 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)    
     name = db.Column(db.String, nullable=False)
     email = db.Column(db.String, nullable=False)
-    teaching = db.relationship("Course", secondary=ins_assoc_table, back_populates="instructors")
+    teaching = db.relationship("Course", secondary=ins_assoc_table, back_populates="tutors")
     availability = db.relationship("Availability", cascade = "delete")
     notifications = db.relationship("Notification", cascade = "delete")
     rate = db.Column(db.String, nullable=True)
