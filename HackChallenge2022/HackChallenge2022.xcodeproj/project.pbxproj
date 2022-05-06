@@ -1,0 +1,431 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		C64C84382824F2ED00701B9D /* SignInController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64C84372824F2EC00701B9D /* SignInController.swift */; };
+		C64C84412825909E00701B9D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64C84402825909E00701B9D /* SceneDelegate.swift */; };
+		C6B1776B281EE37B0035AB78 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B1776A281EE37B0035AB78 /* AppDelegate.swift */; };
+		C6B1776F281EE37B0035AB78 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B1776E281EE37B0035AB78 /* TabBarController.swift */; };
+		C6B17774281EE37E0035AB78 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C6B17773281EE37E0035AB78 /* Assets.xcassets */; };
+		C6B17777281EE37E0035AB78 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C6B17775281EE37E0035AB78 /* LaunchScreen.storyboard */; };
+		C6B17783281EF2FB0035AB78 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = C6B17782281EF2FB0035AB78 /* Alamofire */; };
+		C6B17786281EF3AB0035AB78 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = C6B17785281EF3AB0035AB78 /* GoogleSignIn */; };
+		C6B17788281EF57E0035AB78 /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B17787281EF57E0035AB78 /* NotificationController.swift */; };
+		C6B1778C281F06E10035AB78 /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B1778B281F06E10035AB78 /* ProfileController.swift */; };
+		C6C52391281F29EB00C96D81 /* Codables.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6C52390281F29EB00C96D81 /* Codables.swift */; };
+		C6C52393281F433600C96D81 /* Cells.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6C52392281F433600C96D81 /* Cells.swift */; };
+		C6C52395281FC4BD00C96D81 /* AddTimeControllers.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6C52394281FC4BD00C96D81 /* AddTimeControllers.swift */; };
+		C6C523972821C7A100C96D81 /* CourseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6C523962821C7A100C96D81 /* CourseController.swift */; };
+		C6C52399282334E400C96D81 /* TutorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6C52398282334E400C96D81 /* TutorController.swift */; };
+		C6C5239B28248A4600C96D81 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6C5239A28248A4600C96D81 /* NetworkManager.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		C64C84372824F2EC00701B9D /* SignInController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInController.swift; sourceTree = "<group>"; };
+		C64C843E28251C4900701B9D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		C64C84402825909E00701B9D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		C6B17767281EE37B0035AB78 /* HackChallenge2022.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HackChallenge2022.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C6B1776A281EE37B0035AB78 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		C6B1776E281EE37B0035AB78 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		C6B17773281EE37E0035AB78 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		C6B17776281EE37E0035AB78 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		C6B17778281EE37E0035AB78 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C6B17787281EF57E0035AB78 /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
+		C6B1778B281F06E10035AB78 /* ProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
+		C6C52390281F29EB00C96D81 /* Codables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Codables.swift; sourceTree = "<group>"; };
+		C6C52392281F433600C96D81 /* Cells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cells.swift; sourceTree = "<group>"; };
+		C6C52394281FC4BD00C96D81 /* AddTimeControllers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTimeControllers.swift; sourceTree = "<group>"; };
+		C6C523962821C7A100C96D81 /* CourseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseController.swift; sourceTree = "<group>"; };
+		C6C52398282334E400C96D81 /* TutorController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorController.swift; sourceTree = "<group>"; };
+		C6C5239A28248A4600C96D81 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		C6B17764281EE37B0035AB78 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C6B17783281EF2FB0035AB78 /* Alamofire in Frameworks */,
+				C6B17786281EF3AB0035AB78 /* GoogleSignIn in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		C6B1775E281EE37B0035AB78 = {
+			isa = PBXGroup;
+			children = (
+				C6B17769281EE37B0035AB78 /* HackChallenge2022 */,
+				C6B17768281EE37B0035AB78 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		C6B17768281EE37B0035AB78 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C6B17767281EE37B0035AB78 /* HackChallenge2022.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C6B17769281EE37B0035AB78 /* HackChallenge2022 */ = {
+			isa = PBXGroup;
+			children = (
+				C6B1776A281EE37B0035AB78 /* AppDelegate.swift */,
+				C64C84402825909E00701B9D /* SceneDelegate.swift */,
+				C64C84372824F2EC00701B9D /* SignInController.swift */,
+				C6B1776E281EE37B0035AB78 /* TabBarController.swift */,
+				C6B17787281EF57E0035AB78 /* NotificationController.swift */,
+				C6B1778B281F06E10035AB78 /* ProfileController.swift */,
+				C6C52394281FC4BD00C96D81 /* AddTimeControllers.swift */,
+				C6C523962821C7A100C96D81 /* CourseController.swift */,
+				C6C52398282334E400C96D81 /* TutorController.swift */,
+				C6C52392281F433600C96D81 /* Cells.swift */,
+				C6C52390281F29EB00C96D81 /* Codables.swift */,
+				C6C5239A28248A4600C96D81 /* NetworkManager.swift */,
+				C6B17773281EE37E0035AB78 /* Assets.xcassets */,
+				C6B17775281EE37E0035AB78 /* LaunchScreen.storyboard */,
+				C6B17778281EE37E0035AB78 /* Info.plist */,
+				C64C843E28251C4900701B9D /* GoogleService-Info.plist */,
+			);
+			path = HackChallenge2022;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		C6B17766281EE37B0035AB78 /* HackChallenge2022 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C6B1777B281EE37E0035AB78 /* Build configuration list for PBXNativeTarget "HackChallenge2022" */;
+			buildPhases = (
+				C6B17763281EE37B0035AB78 /* Sources */,
+				C6B17764281EE37B0035AB78 /* Frameworks */,
+				C6B17765281EE37B0035AB78 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = HackChallenge2022;
+			packageProductDependencies = (
+				C6B17782281EF2FB0035AB78 /* Alamofire */,
+				C6B17785281EF3AB0035AB78 /* GoogleSignIn */,
+			);
+			productName = HackChallenge2022;
+			productReference = C6B17767281EE37B0035AB78 /* HackChallenge2022.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		C6B1775F281EE37B0035AB78 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1330;
+				LastUpgradeCheck = 1330;
+				TargetAttributes = {
+					C6B17766281EE37B0035AB78 = {
+						CreatedOnToolsVersion = 13.3.1;
+					};
+				};
+			};
+			buildConfigurationList = C6B17762281EE37B0035AB78 /* Build configuration list for PBXProject "HackChallenge2022" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = C6B1775E281EE37B0035AB78;
+			packageReferences = (
+				C6B17781281EF2FB0035AB78 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				C6B17784281EF3AB0035AB78 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
+			);
+			productRefGroup = C6B17768281EE37B0035AB78 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				C6B17766281EE37B0035AB78 /* HackChallenge2022 */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		C6B17765281EE37B0035AB78 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C6B17777281EE37E0035AB78 /* LaunchScreen.storyboard in Resources */,
+				C6B17774281EE37E0035AB78 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		C6B17763281EE37B0035AB78 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C6B1776F281EE37B0035AB78 /* TabBarController.swift in Sources */,
+				C6C52393281F433600C96D81 /* Cells.swift in Sources */,
+				C6C523972821C7A100C96D81 /* CourseController.swift in Sources */,
+				C6C52395281FC4BD00C96D81 /* AddTimeControllers.swift in Sources */,
+				C6C5239B28248A4600C96D81 /* NetworkManager.swift in Sources */,
+				C6C52399282334E400C96D81 /* TutorController.swift in Sources */,
+				C6B1778C281F06E10035AB78 /* ProfileController.swift in Sources */,
+				C6B1776B281EE37B0035AB78 /* AppDelegate.swift in Sources */,
+				C6B17788281EF57E0035AB78 /* NotificationController.swift in Sources */,
+				C64C84382824F2ED00701B9D /* SignInController.swift in Sources */,
+				C6C52391281F29EB00C96D81 /* Codables.swift in Sources */,
+				C64C84412825909E00701B9D /* SceneDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		C6B17775281EE37E0035AB78 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C6B17776281EE37E0035AB78 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		C6B17779281EE37E0035AB78 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		C6B1777A281EE37E0035AB78 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		C6B1777C281EE37E0035AB78 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 62SAQ9LDFP;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = HackChallenge2022/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = AppDev.HackChallenge2022;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		C6B1777D281EE37E0035AB78 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 62SAQ9LDFP;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = HackChallenge2022/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = AppDev.HackChallenge2022;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C6B17762281EE37B0035AB78 /* Build configuration list for PBXProject "HackChallenge2022" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C6B17779281EE37E0035AB78 /* Debug */,
+				C6B1777A281EE37E0035AB78 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C6B1777B281EE37E0035AB78 /* Build configuration list for PBXNativeTarget "HackChallenge2022" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C6B1777C281EE37E0035AB78 /* Debug */,
+				C6B1777D281EE37E0035AB78 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		C6B17781281EF2FB0035AB78 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+		C6B17784281EF3AB0035AB78 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/google/GoogleSignIn-iOS.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		C6B17782281EF2FB0035AB78 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C6B17781281EF2FB0035AB78 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		C6B17785281EF3AB0035AB78 /* GoogleSignIn */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C6B17784281EF3AB0035AB78 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignIn;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = C6B1775F281EE37B0035AB78 /* Project object */;
+}
