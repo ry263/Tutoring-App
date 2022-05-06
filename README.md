@@ -70,22 +70,7 @@ Response
 }
 ```
 
-#### Create user
-```GET /api/users/```
-```
-Response
-<HTTP STATUS CODE 200>
-{
-    "id": 1,
-    "name": "Rachel Yue",
-    "email": "ry263@cornell.edu",
-    "profile_pic": "url for profile pic",
-    "courses": [ <SERIALIZED COURSES WITHOUT USERS>, ... ],
-    "availability": [ <SERIALIZED TIMES>, ... ],
-    "notifications": [ <SERIALIZED NOTIFICATIONS>, ... ],
-    "rate": "20 per hour"
-}
-```
+
 
 #### Get specific user
 ```GET /api/users/{user_id}/```
