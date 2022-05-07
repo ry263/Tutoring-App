@@ -446,7 +446,7 @@ def add_availablility(user_id):
     )
     db.session.add(new_av)
     db.session.commit()
-    return success_response(new_av.serialize_nc(), 201)
+    return success_response(new_av.serialize(), 201)
 
 @app.route("/api/allcourses/", methods=["POST"])
 def fill_courses():
