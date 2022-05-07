@@ -146,7 +146,7 @@ class User(db.Model):
             "availability": [a.serialize() for a in self.availability],
             "notifications": [n.serialize() for n in self.notifications],
             "rate": self.rate,
-            "password_digest" : self.password_digest,
+            #"password_digest" : self.password_digest,
             "session_token":self.session_token,
             "session_expiration":str(self.session_expiration),
             "update_token":self.update_token
@@ -169,7 +169,7 @@ class User(db.Model):
             "availability": [a.serialize() for a in self.availability],
             "notifications": [n.serialize() for n in self.notifications],
             "rate": self.rate,
-            "password_digest" : self.password_digest,
+            #"password_digest" : self.password_digest,
             "session_token":self.session_token,
             "session_expiration":str(self.session_expiration),
             "update_token":self.update_token
@@ -188,7 +188,7 @@ class User(db.Model):
             "availability": [a.serialize() for a in self.availability],
             "notifications": [n.serialize() for n in self.notifications],
             "rate": self.rate,
-            "password_digest" : self.password_digest,
+            #"password_digest" : self.password_digest,
             "session_token":self.session_token,
             "session_expiration":str(self.session_expiration),
             "update_token":self.update_token
