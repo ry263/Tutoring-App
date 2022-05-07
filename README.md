@@ -343,27 +343,6 @@ Response
 }
 ```
 
-### Prepopulate the courses table(Must call at start of app)
-```POST /api/allcourses/```
-```
-Response
-<HTTP STATUS CODE 200>
-{
-    "courses" : [
-        {
-            "id": 1,
-            "code": "CS 1110",
-            "tutors": [<SERIALIZED USERS WITHOUT COURSES>, ...]
-        },
-        {
-            "id": 2,
-            "code": "CS 2110",
-            "tutors": [<SERIALIZED USERS WITHOUT COURSES>, ...]
-        }
-    ]
-}
-```
-
 ### Add rate to user
 ```POST /api/rate/{user_id}```
 ```
@@ -393,9 +372,7 @@ Response
 Response
 <HTTP STATUS CODE 201>
 {
-    "id": <ID>,
-    "sender_id": <USER INPUT FOR SENDER ID>,
-    "receiver_id": <USER INPUT FOR RECEIVER ID>
+    <DELETED AVAILABILITY>
 }
 ```
 
