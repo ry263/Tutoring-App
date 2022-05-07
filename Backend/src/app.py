@@ -308,8 +308,8 @@ def get_course(code):
     code.strip()
     ind = 0
     for elem in code:
-        if code[elem] == type(int):
-            ind = elem
+        if elem == type(int):
+            ind = code.index(elem)
             print(ind)
             break
 
