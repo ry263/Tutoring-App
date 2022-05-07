@@ -313,11 +313,12 @@ def get_course(code):
                 ind = elem
         except:
             continue
-        
+
     parsed_code = code[:ind-1] + " " + code[ind:]
     
 
     course = Course.query.filter_by(code=parsed_code).first()
+    print(course)
     if course is None:
         return failure_response("Course not found")
     return success_response(course.serialize())
