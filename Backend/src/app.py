@@ -6,6 +6,7 @@ from db import Notification
 from db import db
 from flask import Flask
 from flask import request
+from flask_sqlalchemy import SQLAlchemy
 import json
 import os
 from db import Availability
@@ -42,7 +43,7 @@ app = Flask(__name__)
 app.secret_key = os.urandom(24)
 
 # setup config
-app.config["SQLALCHEMY_DATABASE_URI"] = f"sqlite:///{db_filename}"
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///{db_filename}"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config["SQLALCHEMY_ECHO"] = True
 
