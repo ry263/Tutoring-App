@@ -55,7 +55,7 @@ Response
 ```
 Request
 {
-    "update_token": 
+    <UPDATE TOKEN IN HEADER> 
 }
 ```
 ```
@@ -191,9 +191,7 @@ Request
 Response
 <HTTP STATUS CODE 201>
 {
-    "id": <ID>,
-    "time": <USER INPUT>,
-    "user_id": <id>
+    "time": <USER INPUT>
 }
 ```
 
@@ -241,14 +239,12 @@ Response
         {
             "id": 1,
             "sender_id": 3,
-            "receiver_id": 1,
-            "note": "Heyo wassup you wanna tutor me my number is ##########"
+            "receiver_id": 1
         },
         {
             "id": 2,
             "sender_id": 3,
-            "receiver_id": 2,
-            "note": "Hello, if you're free to tutor me this Thursday, please email me back at fake@email.com"
+            "receiver_id": 2
         }
     ]
 }
@@ -263,7 +259,7 @@ Response
     "id": 1,
     "sender_id": 3,
     "receiver_id": 1,
-    "note": "Heyo wassup you wanna tutor me my number is ##########"
+    "time": "<TIME OF NOTIFICATION>"
 }
 ```
 
@@ -273,7 +269,8 @@ Response
 Request
 {
     "sender_id": <USER INPUT>,
-    "receiver_id": <USER INPUT>
+    "receiver_id": <USER INPUT>,
+    "time": "<TIME OF NOTIFICATION>"
 }
 ```
 ```
@@ -282,7 +279,8 @@ Response
 {
     "id": <ID>,
     "sender_id": <USER INPUT FOR SENDER ID>,
-    "receiver_id": <USER INPUT FOR RECEIVER ID>
+    "receiver_id": <USER INPUT FOR RECEIVER ID>,
+    "time": "<TIME OF NOTIFICATION>"
 }
 ```
 
@@ -296,7 +294,8 @@ Response
         {        
             "id": id,              
             "sender_id": sender_id,
-            "receiver_id": receiver_id
+            "receiver_id": receiver_id,
+            "time": "<TIME OF NOTIFICATION>"
         }
     ]
 
