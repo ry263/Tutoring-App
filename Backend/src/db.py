@@ -140,9 +140,9 @@ class User(db.Model):
         return {        
             "id": self.id,               
             "name": self.name, 
-            "image":self.profile_pic,   
+            "profile":self.profile_pic,   
             "email": self.email,
-            "courses": [c.serialize_nc() for c in self.teaching],
+            "teaching": [c.serialize_nc() for c in self.teaching],
             "availability": [a.serialize() for a in self.availability],
             "rate": self.rate,
             "session_token":self.session_token,
@@ -172,9 +172,9 @@ class User(db.Model):
         return {        
             "id": self.id,               
             "name": self.name, 
-            "image":self.profile_pic,   
+            "profile_pic":self.profile_pic,   
             "email": self.email,
-            "courses": [c.serialize_nc() for c in self.teaching],
+            "teaching": [c.serialize_nc() for c in self.teaching],
             "availability": [a.serialize() for a in self.availability],
             "rate": self.rate,
             "session_token":self.session_token,
