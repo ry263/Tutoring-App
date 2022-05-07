@@ -301,6 +301,7 @@ def get_course(code):
     code.replace("_"," ")
     x = code.index(" ")
     space = (len(code) - 5)
+    parsed_code = code
     if (x != space):
         parsed_code = code[:space] + " " + code[space:]
     
