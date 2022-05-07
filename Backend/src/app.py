@@ -354,7 +354,7 @@ def get_notifications_for_user(user_id):
     if user is None:
         return failure_response("User not found")
     notifications = Notification.query.filter_by(receiver_id=user_id).order_by(desc(Notification.time)).all()
-    return success_response([n.serialize for n in notifications])
+    return success_response([n.serialize() for n in notifications])
 
 @app.route("/api/users/<int:user_id>/")
 def get_user(user_id):
