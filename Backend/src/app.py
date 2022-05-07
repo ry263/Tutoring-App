@@ -296,13 +296,13 @@ def get_course(code):
     """
     Endpoint for getting a course by code
     """
-    # code.strip()
-    # code.replace("-"," ")
-    # code.replace("_"," ")
-    # x = code.index(" ")
-    # space = (len(code) - 5)
-    # if (x != space):
-    #     parsed_code = code[:space] + " " + code[space:]
+    code.strip()
+    code.replace("-"," ")
+    code.replace("_"," ")
+    x = code.index(" ")
+    space = (len(code) - 5)
+    if (x != space):
+        parsed_code = code[:space] + " " + code[space:]
     
     course = Course.query.filter_by(code=code).first()
     if course is None:
