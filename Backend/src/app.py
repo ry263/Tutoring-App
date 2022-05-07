@@ -238,7 +238,7 @@ def secret_message():
     if not user or not user.verify_session_token(session_token):
         return failure_response("Invalid Session Token")
 
-    return success_response(user.serialize())
+    return success_response(user.serialize_session())
 
 
 @app.route("/users/current/")
