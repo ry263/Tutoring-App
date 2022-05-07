@@ -162,7 +162,8 @@ class User(db.Model):
         """ 
         return {        
             "id": self.id,               
-            "name": self.name,    
+            "name": self.name, 
+            "profile_pic":self.profile_pic,   
             "email": self.email,
             "rate":self.rate,
             "teaching":[],
