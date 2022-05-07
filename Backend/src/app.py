@@ -311,12 +311,13 @@ def get_course(code):
         try:
             if int(code[elem]) == type(int):
                 ind = elem
+                print(ind)
+                break
         except:
             continue
 
     parsed_code = code[:ind-1] + " " + code[ind:]
-    
-
+    print(parsed_code)
     course = Course.query.filter_by(code=parsed_code).first()
     print(course)
     if course is None:
