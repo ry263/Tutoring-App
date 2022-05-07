@@ -299,12 +299,13 @@ def get_course(code):
     code.strip()
     code.replace("+"," ")
     code.replace("%"," ")
-    x = code.find(" ")
+    y = code.find(" ")
     space = (len(code) - 5)
     parsed_code = code
-    if (x != space):
+    if (y != space):
         parsed_code = code[:space] + " " + code[space:]
     
+
     course = Course.query.filter_by(code=parsed_code).first()
     if course is None:
         return failure_response("Course not found")
