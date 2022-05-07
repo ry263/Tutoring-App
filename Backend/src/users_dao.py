@@ -3,7 +3,7 @@ DAO (Data Access Object) file
 
 Helper file containing functions for accessing data in our database
 """
-
+import db
 from db import User
 
 
