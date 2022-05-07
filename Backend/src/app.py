@@ -299,7 +299,7 @@ def get_course(code):
     code.strip()
     code.replace("-"," ")
     code.replace("_"," ")
-    x = code.index(" ")
+    x = code.find(" ")
     space = (len(code) - 5)
     parsed_code = code
     if (x != space):
