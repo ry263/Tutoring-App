@@ -1,4 +1,5 @@
 
+import email
 import profile
 
 from sqlalchemy import desc
@@ -152,11 +153,11 @@ def logout():
     logout_user()
     return success_response("User logged out")
 """
-
+"""
 def extract_token(request):
     """
-    Helper function that extracts the token from the header of a request
-    """
+    #Helper function that extracts the token from the header of a #request
+"""
     auth_header = request.headers.get("Authorization")
 
     if auth_header is None:
@@ -165,7 +166,7 @@ def extract_token(request):
     bearer_token = auth_header.replace("Bearer", "").strip()
 
     return True, bearer_token
-
+"""
 @app.route("/register/", methods=["POST"])
 def register_account():
     """
@@ -180,12 +181,13 @@ def register_account():
     if email is None or password is None or name is None:
         return failure_response("missing email, name, or password")
 
-    was_successful, user = users_dao.create_user(name, email, password, profile_pic)
+    user = User(name,email,password,profile_pic)
+    #was_successful, user = users_dao.create_user(name, email, password, profile_pic)
 
-    if not was_successful:
-        return failure_response("user already exists")
+    #if not was_successful:
+        #return failure_response("user already exists")
 
-    return success_response(user.serialize_session(),201)
+    return success_response(user.serialize(),201)
 
 
 @app.route("/login/", methods=["POST"])
@@ -200,19 +202,20 @@ def login():
     if email is None or password is None:
         return failure_response("missing email, or password")
 
-    was_successful, user = users_dao.verify_credentials(email, password)
+    user = User.query.filter_by(email= email).first()
+    #was_successful, user = users_dao.verify_credentials(email, password)
     
-    if not was_successful:
-        return failure_response("Incorrect information")
+    #if not was_successful:
+        #return failure_response("Incorrect information")
 
-    return success_response(user.serialize_session())
+    return success_response(user.serialize())
 
-
+"""
 @app.route("/session/", methods=["POST"])
 def update_session():
     """
-    Endpoint for updating a user's session
-    """
+   # Endpoint for updating a user's session
+"""
     was_successful, update_token = extract_token(request)
 
     if not was_successful:
@@ -229,11 +232,11 @@ def update_session():
 @app.route("/secret/", methods=["GET"])
 def secret_message():
     """
-    Endpoint for verifying a session token and returning a secret message
+    #Endpoint for verifying a session token and returning a secret message
 
-    In your project, you will use the same logic for any endpoint that needs
-    authentication
-    """
+   # In your project, you will use the same logic for any endpoint that needs
+   # authentication
+"""
     was_successful, session_token = extract_token(request)
 
     if not was_successful:
@@ -257,6 +260,7 @@ def get_current_user():
     if not user or not user.verify_session_token(session_token):
         return failure_response("Invalid Session Token")
     return success_response(user.serialize())
+"""
 
 
 @app.route("/api/courses/")

@@ -93,21 +93,21 @@ class User(db.Model):
         self.email = kwargs.get("email", "")
         self.profile_pic = kwargs.get("profile_pic")
         self.password_digest = bcrypt.hashpw(kwargs.get("password").encode("utf8"), bcrypt.gensalt(rounds=13))
-        self.renew_session()
+        #self.renew_session()
 
-
+"""
     def _urlsafe_base_64(self):
         """
-        Randomly generates hashed tokens (used for session/update tokens)
+       # Randomly generates hashed tokens (used for session/update tokens)
         """
         return hashlib.sha1(os.urandom(64)).hexdigest()
 
     def renew_session(self):
         """
-        Renews the sessions, i.e.
-        1. Creates a new session token
-        2. Sets the expiration time of the session to be a day from now
-        3. Creates a new update token
+       # Renews the sessions, i.e.
+        #1. Creates a new session token
+        #2. Sets the expiration time of the session to be a day from now
+        #3. Creates a new update token
         """
         self.session_token = self._urlsafe_base_64()
         self.session_expiration = datetime.datetime.now() + datetime.timedelta(days=1)
@@ -115,26 +115,26 @@ class User(db.Model):
 
     def verify_password(self, password):
         """
-        Verifies the password of a user
+       # Verifies the password of a user
         """
         return bcrypt.checkpw(password.encode("utf8"), self.password_digest)
 
     def verify_session_token(self, session_token):
         """
-        Verifies the session token of a user
+       # Verifies the session token of a user
         """
         return session_token == self.session_token and datetime.datetime.now() < self.session_expiration
 
     def verify_update_token(self, update_token):
         """
-        Verifies the update token of a user
+       # Verifies the update token of a user
         """
         return update_token == self.update_token
 
 
     def serialize(self):   
         """
-        Serialize a User object
+       # Serialize a User object
         """ 
         return {        
             "id": self.id,               
@@ -152,7 +152,7 @@ class User(db.Model):
 
     def serialize_nc(self):   
         """
-        Serialize a User object without courses field
+        #Serialize a User object without courses field
         """ 
         return {        
             "id": self.id,               
@@ -160,7 +160,7 @@ class User(db.Model):
             "email": self.email,
             "rate":self.rate
         }
-
+"""
     def serialize_session(self):   
         """
         Serialize a User object
