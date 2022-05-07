@@ -180,13 +180,7 @@ def register_account():
     if not was_successful:
         return failure_response("user already exists")
 
-    return success_response(
-        {
-            "session_token":user.session_token,
-            "session_expiration":str(user.session_expiration),
-            "update_token":user.update_token
-        },201
-    )
+    return success_response(user.serialize_session(),201)
 
 
 @app.route("/login/", methods=["POST"])
@@ -206,13 +200,7 @@ def login():
     if not was_successful:
         return failure_response("Incorrect information")
 
-    return success_response(
-        {
-            "session_token":user.session_token,
-            "session_expiration":str(user.session_expiration),
-            "update_token":user.update_token
-        },
-    )
+    return success_response(user.serialize_session())
 
 
 @app.route("/session/", methods=["POST"])
@@ -230,13 +218,7 @@ def update_session():
     except Exception as e:
         return failure_response("Invalid Update token: {str(e)}" )
 
-    return success_response(
-        {
-            "session_token":user.session_token,
-            "session_expiration":str(user.session_expiration),
-            "update_token":user.update_token
-        },
-    )
+    return success_response(user.serialize_session())
 
 
 @app.route("/secret/", methods=["GET"])

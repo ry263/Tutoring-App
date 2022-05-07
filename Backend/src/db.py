@@ -160,6 +160,24 @@ class User(db.Model):
             "email": self.email,
             "rate":self.rate
         }
+
+    def serialize_session(self):   
+        """
+        Serialize a User object
+        """ 
+        return {        
+            "id": self.id,               
+            "name": self.name, 
+            "image":self.profile_pic,   
+            "email": self.email,
+            "courses": [c.serialize_nc() for c in self.teaching],
+            "availability": [a.serialize() for a in self.availability],
+            "rate": self.rate,
+            "session_token":self.session_token,
+            "session_expiration":str(self.session_expiration),
+            "update_token":self.update_token
+        }
+    
     
 class Availability(db.Model):
     """
