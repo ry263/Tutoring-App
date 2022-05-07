@@ -19,9 +19,17 @@ Request
 Response
 <HTTP STATUS CODE 201>
 {
-    "session_token":user.session_token,
-    "session_expiration":str(user.session_expiration),
-    "update_token":user.update_token
+    "id": <ID>,
+    "name": <NAME FROM USER INPUT>,
+    "email": <EMAIL FROM USER INPUT>,
+    "profile_pic": <PROFILE PIC FROM USER INPUT>,
+    "courses": [ <SERIALIZED COURSES WITHOUT USERS>, ... ],
+    "availability": [ <SERIALIZED TIMES>, ... ],
+    "notifications": [ <SERIALIZED NOTIFICATIONS>, ... ],
+    "rate": "20 per hour"
+    "session_token": User Session Token,
+    "session_expiration": User Session Expiration,
+    "update_token": User Update Token
 }
 ```
 #### Login
@@ -54,6 +62,14 @@ Request
 Response
 <HTTP STATUS CODE 200>
 {
+    "id": 1,
+    "name": "Rachel Yue",
+    "email": "ry263@cornell.edu",
+    "profile_pic": "url for profile pic",
+    "courses": [ <SERIALIZED COURSES WITHOUT USERS>, ... ],
+    "availability": [ <SERIALIZED TIMES>, ... ],
+    "notifications": [ <SERIALIZED NOTIFICATIONS>, ... ],
+    "rate": "20 per hour"
     "session_token": New User Session Token,
     "session_expiration": New User Session Expiration,
     "update_token": New User Update Token
@@ -65,7 +81,17 @@ Response
 Response
 <HTTP STATUS CODE 200>
 {
-    "message":"You have successfully implemented sessions"
+    "id": 1,
+    "name": "Rachel Yue",
+    "email": "ry263@cornell.edu",
+    "profile_pic": "url for profile pic",
+    "courses": [ <SERIALIZED COURSES WITHOUT USERS>, ... ],
+    "availability": [ <SERIALIZED TIMES>, ... ],
+    "notifications": [ <SERIALIZED NOTIFICATIONS>, ... ],
+    "rate": "20 per hour"
+    "session_token": New User Session Token,
+    "session_expiration": New User Session Expiration,
+    "update_token": New User Update Token
 }
 ```
 
