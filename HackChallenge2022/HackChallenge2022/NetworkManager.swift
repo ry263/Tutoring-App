@@ -22,7 +22,7 @@ class NetworkManager {
             switch response.result {
                 case.success(let data):
                     let jsonDecoder = JSONDecoder()
-                    if let userResponse = try? jsonDecoder.decode([Course].self, from: data) {
+                    if let userResponse = try? jsonDecoder.decode( [Course].self , from: data) {
                         completion(userResponse)
                     } else {
                         print("failed to decode getAllCourses")
@@ -96,7 +96,7 @@ class NetworkManager {
             "user_id": userID
         ]
         
-        AF.request(endpoint, method: .post, parameters: params).validate().responseData { response in switch response.result {
+        AF.request(endpoint, method: .post, parameters: params, encoder: JSONParameterEncoder.default).validate().responseData { response in switch response.result {
                 case .success(let data):
                     let jsonDecoder = JSONDecoder()
                     if let userResponse = try? jsonDecoder.decode(Course.self, from: data) {
@@ -117,7 +117,7 @@ class NetworkManager {
         let params: [String : String] = [
             "user_id": String(UserID)
         ]
-        AF.request(endpoint, method: .post, parameters: params).validate().responseData { response in
+        AF.request(endpoint, method: .post, parameters: params, encoder: JSONParameterEncoder.default).validate().responseData { response in
             switch response.result {
                 case .success(let data):
                     let jsonDecoder = JSONDecoder()
@@ -195,11 +195,15 @@ class NetworkManager {
         }
     }
     
-    static func LogIn(completion: @escaping (User) -> Void) {
+    static func LogIn(email: String, password: String, completion: @escaping (User) -> Void) {
         
-        let endpoint = "\(host)/"
+        let endpoint = "\(host)/login/"
+        let params: [String : String] = [
+            "email" : email,
+            "password": password
+        ]
         
-        AF.request(endpoint, method: .get).validate().responseData { response in
+        AF.request(endpoint, method: .post,parameters: params, encoder: JSONParameterEncoder.default).validate().responseData { response in
             switch response.result {
                 case .success(let data) :
                     let jsonDecoder = JSONDecoder()
@@ -214,6 +218,81 @@ class NetworkManager {
         }
     }
     
+    static func updateSession(update_token: String, completion: @escaping (User) -> Void) {
+        
+//        let endpoint = "\(host)/session/"
+//        var headers: HTTPHeader =
+//        [ "Authorization" : update_token ]
+//
+//        AF.request(endpoint, method: .get, headers: headers).validate().responseData {
+//            _ in
+//        }
+        
+        
+        
+        
+        
+        
+//        AF.request(endpoint, method: .post, parameters: [:], encoder: JSONEncoder(), headers: headers).validate().responseData { response in
+//            switch response.result {
+//                case .success(let data) :
+//                    let jsonDecoder = JSONDecoder()
+//                    if let userResponse = try? jsonDecoder.decode(User.self, from: data) {
+//                        completion(userResponse)
+//                    } else {
+//                        print("Failed to decode updateSession")
+//                    }
+//                case .failure(let error):
+//                    print(error.localizedDescription)
+//            }
+//        }
+    }
+    
+    static func registerUser(email: String, password: String, name: String, profile_pic: String, completion: @escaping (User) -> Void) {
+        
+        let endpoint = "\(host)/register/"
+        let params: [String:String] = [
+            "email" : email,
+            "password" : password,
+            "name" : name,
+            "profile_pic" : profile_pic
+        ]
+        
+        AF.request(endpoint, method: .post, parameters: params, encoder: JSONParameterEncoder.json).validate().responseData { response in
+            switch response.result {
+                case .success(let data):
+                    let jsonDecoder = JSONDecoder()
+                    if let userResponse = try? jsonDecoder.decode(User.self, from: data) {
+                        completion(userResponse)
+                    } else {
+                        print("Failed to decode registerUser")
+                    }
+                case.failure(let error):
+                    print(error.localizedDescription)
+            }
+        }
+        
+    }
+    
+    static func verifySession(completion: @escaping (User) -> Void) {
+        
+        let endpoint = "\(host)/secret/"
+        
+        AF.request(endpoint, method: .get).validate().responseData { response in
+            switch response.result {
+                case .success(let data):
+                    let jsonDecoder = JSONDecoder()
+                    if let userResponse = try? jsonDecoder.decode(User.self, from: data) {
+                        completion(userResponse)
+                    } else {
+                        print("Failed to decode verifySession")
+                    }
+                case.failure(let error):
+                    print(error.localizedDescription)
+                }
+        }
+    }
+    
     
     // MARK: Availability Functions
     
@@ -224,7 +303,7 @@ class NetworkManager {
             "time": time
         ]
         
-        AF.request(endpoint, method: .post, parameters: params).validate().responseData {
+        AF.request(endpoint, method: .post, parameters: params, encoder: JSONParameterEncoder.default).validate().responseData {
             response in switch response.result {
                 case.success(let data):
                     let jsonDecoder = JSONDecoder()
@@ -288,7 +367,7 @@ class NetworkManager {
             "receiver_id": String(receiverID)
         ]
         
-        AF.request(endpoint, method: .post, parameters: params).validate().responseData {
+        AF.request(endpoint, method: .post, parameters: params, encoder: JSONParameterEncoder.default).validate().responseData {
             response in switch response.result {
                 case.success(let data):
                     let jsonDecoder = JSONDecoder()
@@ -302,5 +381,5 @@ class NetworkManager {
             }
         }
     }
-        
+    
 }

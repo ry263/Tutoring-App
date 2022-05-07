@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C64C84382824F2ED00701B9D /* SignInController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64C84372824F2EC00701B9D /* SignInController.swift */; };
+		C64C84382824F2ED00701B9D /* Intro.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64C84372824F2EC00701B9D /* Intro.swift */; };
 		C64C84412825909E00701B9D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64C84402825909E00701B9D /* SceneDelegate.swift */; };
 		C6B1776B281EE37B0035AB78 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B1776A281EE37B0035AB78 /* AppDelegate.swift */; };
 		C6B1776F281EE37B0035AB78 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B1776E281EE37B0035AB78 /* TabBarController.swift */; };
@@ -26,7 +26,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		C64C84372824F2EC00701B9D /* SignInController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInController.swift; sourceTree = "<group>"; };
+		C64C84372824F2EC00701B9D /* Intro.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Intro.swift; sourceTree = "<group>"; };
 		C64C843E28251C4900701B9D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C64C84402825909E00701B9D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		C6B17767281EE37B0035AB78 /* HackChallenge2022.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HackChallenge2022.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -79,7 +79,7 @@
 			children = (
 				C6B1776A281EE37B0035AB78 /* AppDelegate.swift */,
 				C64C84402825909E00701B9D /* SceneDelegate.swift */,
-				C64C84372824F2EC00701B9D /* SignInController.swift */,
+				C64C84372824F2EC00701B9D /* Intro.swift */,
 				C6B1776E281EE37B0035AB78 /* TabBarController.swift */,
 				C6B17787281EF57E0035AB78 /* NotificationController.swift */,
 				C6B1778B281F06E10035AB78 /* ProfileController.swift */,
@@ -184,7 +184,7 @@
 				C6B1778C281F06E10035AB78 /* ProfileController.swift in Sources */,
 				C6B1776B281EE37B0035AB78 /* AppDelegate.swift in Sources */,
 				C6B17788281EF57E0035AB78 /* NotificationController.swift in Sources */,
-				C64C84382824F2ED00701B9D /* SignInController.swift in Sources */,
+				C64C84382824F2ED00701B9D /* Intro.swift in Sources */,
 				C6C52391281F29EB00C96D81 /* Codables.swift in Sources */,
 				C64C84412825909E00701B9D /* SceneDelegate.swift in Sources */,
 			);
