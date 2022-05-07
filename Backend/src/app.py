@@ -304,7 +304,7 @@ def get_course(code):
     if (x != space):
         parsed_code = code[:space] + " " + code[space:]
     
-    course = Course.query.filter_by(code=code).first()
+    course = Course.query.filter_by(code=parsed_code).first()
     if course is None:
         return failure_response("Course not found")
     return success_response(course.serialize())
