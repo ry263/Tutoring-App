@@ -52,6 +52,8 @@ def create_user(name,email, password,profile_pic):
         return False, optional_user
 
     user = User(name = name, email = email, password =password, profile_pic = profile_pic)
+    db.session.add(user)
+    db.session.commit()
     return True, user
 
 
