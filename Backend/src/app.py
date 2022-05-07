@@ -199,7 +199,7 @@ def login():
     password = body.get("password")
 
     if email is None or password is None:
-        return failure_response("missing netid, or password")
+        return failure_response("missing email, or password")
 
     was_successful, user = users_dao.verify_credentials(email, password)
 
