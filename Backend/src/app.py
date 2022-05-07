@@ -148,25 +148,8 @@ def callback():
     return success_response(user.serialize(), 201)
 #-------------------------------------------------------------------------------------------------
 
-@app.route("/logout/", methods=["GET"])
-def logout():
-    logout_user()
-    return success_response("User logged out")
 """
-"""
-def extract_token(request):
-    """
-    #Helper function that extracts the token from the header of a #request
-"""
-    auth_header = request.headers.get("Authorization")
 
-    if auth_header is None:
-        return False,json.dumps({"Missing Authorization header"})
-
-    bearer_token = auth_header.replace("Bearer", "").strip()
-
-    return True, bearer_token
-"""
 @app.route("/register/", methods=["POST"])
 def register_account():
     """
@@ -210,57 +193,6 @@ def login():
 
     return success_response(user.serialize())
 
-"""
-@app.route("/session/", methods=["POST"])
-def update_session():
-    """
-   # Endpoint for updating a user's session
-"""
-    was_successful, update_token = extract_token(request)
-
-    if not was_successful:
-        return update_token
-
-    try:
-        user = users_dao.renew_session(update_token)
-    except Exception as e:
-        return failure_response("Invalid Update token: {str(e)}" )
-
-    return success_response(user.serialize_session())
-
-
-@app.route("/secret/", methods=["GET"])
-def secret_message():
-    """
-    #Endpoint for verifying a session token and returning a secret message
-
-   # In your project, you will use the same logic for any endpoint that needs
-   # authentication
-"""
-    was_successful, session_token = extract_token(request)
-
-    if not was_successful:
-        return session_token
-
-    user = users_dao.get_user_by_session_token(session_token)
-    if not user or not user.verify_session_token(session_token):
-        return failure_response("Invalid Session Token")
-
-    return success_response(user.serialize_session())
-
-
-@app.route("/users/current/")
-def get_current_user():
-    was_successful, session_token = extract_token(request)
-
-    if not was_successful:
-        return session_token
-
-    user = users_dao.get_user_by_session_token(session_token)
-    if not user or not user.verify_session_token(session_token):
-        return failure_response("Invalid Session Token")
-    return success_response(user.serialize())
-"""
 
 
 @app.route("/api/courses/")
