@@ -92,7 +92,8 @@ class User(db.Model):
         self.name = kwargs.get("name", "")
         self.email = kwargs.get("email", "")
         self.profile_pic = kwargs.get("profile_pic")
-        self.password_digest = bcrypt.hashpw(kwargs.get("password").encode("utf8"), bcrypt.gensalt(rounds=13))
+        self.password_digest = kwargs.get("password")
+         #bcrypt.hashpw(kwargs.get("password").encode("utf8"), bcrypt.gensalt(rounds=13))
         self.renew_session()
 
 

@@ -1,7 +1,7 @@
 
 import profile
 
-from sqlalchemy import desc
+from sqlalchemy import desc, null
 from db import Notification
 from db import db
 
@@ -177,13 +177,16 @@ def register_account():
     password = body.get("password")
     name = body.get("name")
     profile_pic = body.get("profile_pic")
-    if email is None or password is None or name is None:
-        return failure_response("missing email, name, or password")
+    #if email is None or password is None or name is None:
+       # return failure_response("missing email, name, or password")
 
-    was_successful, user = users_dao.create_user(name, email, password, profile_pic)
+    #was_successful, user = users_dao.create_user(name, email, password, profile_pic)
+    user = User(name = name, email =email, password =password, profile_pic =profile_pic )
+    #if not was_successful:
+    db.session.add(user)
+    db.session.commit()
 
-    if not was_successful:
-        return failure_response("user already exists")
+        #return failure_response("user already exists")
 
     return success_response(user.serialize_session(),201)
 
@@ -197,12 +200,14 @@ def login():
     email = body.get("email")
     password = body.get("password")
 
-    if email is None or password is None:
-        return failure_response("missing email, or password")
+    #if email is None or password is None:
+        #return failure_response("missing email, or password")
 
-    was_successful, user = users_dao.verify_credentials(email, password)
+    #was_successful, user = users_dao.verify_credentials(email, password)
+    user = User.query.filter_by(email =email).first()
     
-    if not was_successful:
+
+    if user == null or user.password_digest != password:
         return failure_response("Incorrect information")
 
     return success_response(user.serialize_session())
