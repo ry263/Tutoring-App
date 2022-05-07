@@ -31,10 +31,10 @@ class TutorController: UIViewController {
         
         view.backgroundColor = .white
         
-        selectedCourse.tutors.append(Josh)
-        selectedCourse.tutors.append(Joel)
-        selectedCourse.tutors.append(Lukman)
-        displayedTutors = getTutors(course: selectedCourse)
+//        selectedCourse.tutors.append(Josh)
+//        selectedCourse.tutors.append(Joel)
+//        selectedCourse.tutors.append(Lukman)
+//        displayedTutors = getTutors(course: selectedCourse)
         
         courseTitle.font = .systemFont(ofSize: 24, weight: .bold)
         courseTitle.textAlignment = .center

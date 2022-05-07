@@ -64,7 +64,10 @@ extension NotificationController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: reuseID, for: indexPath) as? notifCell {
             let notification = notifArray[indexPath.row]
-            cell.configure(image: user.profile_pic, note: notification.label)
+            // MARK: Get sender by ID
+            
+            let user = self.user
+            cell.configure(image: user!.profile_pic, user: user!)
             cell.selectionStyle = .none
             return cell
         }
@@ -98,10 +101,9 @@ class notifCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    // Need to figure out how to get image from URL later/ need backend spec to figure it out
-    func configure(image: String, note: String) {
+    func configure(image: String, user: User) {
         self.image.image = UIImage(named: image)
-        self.label.text = note
+        self.label.text = "\(user.email) reached out"
     }
     
     func setUpConstraints() {

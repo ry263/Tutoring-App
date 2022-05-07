@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import GoogleSignIn
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -24,26 +23,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         vc.window = self.window
         window.rootViewController = UINavigationController(rootViewController: vc)
         
-//        GIDSignIn.sharedInstance.restorePreviousSignIn { user, error in
-//            if error != nil || user == nil {
-//              // Show the app's signed-out state.
-//                let vc = SignInController()
-//                vc.window = self.window
-//                window.rootViewController = UINavigationController(rootViewController: vc)
-//
-//            } else {
-//              // Show the app's signed-in state.
-//
-////                NetworkManager.LogIn() {User in}
-////                print("Login check - I printed this")
-//
-//                NetworkManager.getCurrentUser() {User in
-//                    print("getCurrent Check")
-//                    let vc = TabBar(user: User)
-//                    window.rootViewController = vc
-//                }
-//            }
-//          }
+        NetworkManager.getAllCourses() { _ in}
         
         window.makeKeyAndVisible()
     }

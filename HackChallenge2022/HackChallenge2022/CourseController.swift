@@ -53,6 +53,10 @@ class CourseController: UIViewController {
         extraText.clipsToBounds = true
         view.addSubview(extraText)
         
+        NetworkManager.getAllCourses() { courses in
+            self.courses = courses
+        }
+        
         resultsTableController = ResultsTableController()
         resultsTableController.parentController = self
         resultsTableController.tableView.rowHeight = 40.0
@@ -102,11 +106,10 @@ extension CourseController: UITableViewDelegate {
                 let userID = String(user.id)
                 NetworkManager.addTutor(courseID: courseID, userID: userID) { _ in
                     
-                    
                 }
                 
-                parentController?.courses.insert(selectedRow, at: courses.count-1)
-                selectedRow.tutors.append(user)
+                parentController?.courses = user.teaching
+                parentController?.courses.append(parentController!.addRow)
                 parentController?.tutoring.reloadData()
                 navigationController?.popViewController(animated: true)
             } else {
@@ -146,9 +149,7 @@ extension CourseController: UISearchControllerDelegate, UISearchBarDelegate {
                 self.resultsTableController.course = [course]
                 self.resultsTableController.tableView.reloadData()
             }
-        } catch {
-            showFailure()
-        }
+        } 
         
         
 //        for course in allCourses {

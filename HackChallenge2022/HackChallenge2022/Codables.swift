@@ -9,16 +9,21 @@ import Foundation
 import UIKit
 
 class User: Codable {
+    
+    var id: Int
     var name: String
-    var profile_pic: String
+    var email: String
     var teaching: [Course]
     var availability: [Availability]
-    var rate: String?
     var notifications: [Notification]
-    var email: String
-    var id: Int
+    var rate: String?
+    var profile_pic: String
+    var password_digest: String
+    var session_token: String
+    var session_expiration: String
+    var update_token: String
     
-    init(name: String, image: String, teaching: [Course], availability: [Availability], rate: String?, notifications:[Notification], email: String, ID: Int) {
+    init(name: String, image: String, teaching: [Course], availability: [Availability], rate: String?, notifications:[Notification], email: String, ID: Int, password_digest: String, session_token: String, session_expiration: String, update_token: String) {
         self.name = name
         self.profile_pic = image
         self.teaching = teaching
@@ -27,6 +32,10 @@ class User: Codable {
         self.notifications = notifications
         self.email = email
         self.id = ID
+        self.password_digest = password_digest
+        self.session_token = session_token
+        self.session_expiration = session_expiration
+        self.update_token = update_token
     }
 }
 
@@ -87,16 +96,7 @@ let INFO3300 = Course(code: "INFO 3300", tutors: [], id: 3)
 
 let avail1 = Availability(time: "5/4/22, 6:00 PM", userID: 0, ID: 1)
 
-let Josh = User(name: "Josh", image: "profile.png", teaching: [MATH1120,CS2110],availability: [avail1], rate: "15", notifications: [notif1],email: "JS239@cornell.edu" ,ID: 1)
-
-let notif1 = Notification(image: "profile.png", label: "kjc248 wants to learn from you",senderID: 0,receiverID: 1,ID: 0, time: "2022-05-06 03:17:18.934100")
-
-let Joel = User(name: "Joel", image: "profile.png", teaching: [MATH1120,CS2110],availability: [avail1], rate: "15", notifications: [notif1], email: "jev66@cornell.edu",ID: 0)
-
-let Lukman = User(name: "Lukman", image: "profile.png", teaching: [MATH1120,CS2110], availability: [avail1], rate: "15", notifications: [notif1], email: "lm264@cornell.edu", ID: 4)
-
-
-
+let Joel = User(name: "Joel", image: "profile.png", teaching: [MATH1120], availability: [avail1], rate: "15", notifications: [], email: "jev66@cornell.edu", ID: 0, password_digest: "wood", session_token: "23", session_expiration: "245", update_token: "96")
 
 extension Course: Equatable,Comparable {
     static func < (lhs: Course, rhs: Course) -> Bool {

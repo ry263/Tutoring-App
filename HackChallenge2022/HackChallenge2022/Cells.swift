@@ -149,11 +149,7 @@ class TutorCell: UICollectionViewCell {
     }
     
     func configure(userPic: String) {
-        if let pic = URL(string: userPic) {
-            image.load(url: pic)
-        } else {
-            image.image = UIImage(named: "profile.png")
-        }
+        self.image.image = UIImage(named: userPic)
     }
     
     func setUpConstraints() {

@@ -72,11 +72,6 @@ class ProfileController: UIViewController {
         view.backgroundColor = .white
         
         profilePic.image = UIImage(named: "profile.png")
-        if let pic = URL(string: user.profile_pic) {
-            profilePic.load(url: pic)
-        } else {
-            profilePic.image = UIImage(named: "profile.png")
-        }
         profilePic.layer.cornerRadius = 100.0
         profilePic.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(profilePic)
@@ -143,20 +138,20 @@ class ProfileController: UIViewController {
         rateTime.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(rateTime)
         
+        self.courses = user.teaching
+        self.times = user.availability
+        
         if ownAccount {
-            // TODO: Make users able to delete a course or availability
+            // MARK: Make users able to delete a course or availability
             tutoring.delegate = self
             availability.delegate = self
             rateField.delegate = self
             rateField.isUserInteractionEnabled = true
             
-            self.courses = user.teaching
             self.courses.append(addRow)
-            self.times = user.availability
             self.times.append(addTime)
+            
         } else {
-            self.courses = user.teaching
-            self.times = user.availability
             
             requestHelp.setTitle(" Request Help! ", for: .normal)
             requestHelp.setTitleColor(.black, for: .normal)
@@ -219,14 +214,15 @@ class ProfileController: UIViewController {
     
     @objc func helpRequest() {
         
-        // TODO: Send Notification
+        NetworkManager.createNotification(senderID: userViewing!.id, receiverID: user.id) { notif in
+            
+        }
         
         presentingViewController?.dismiss(animated: true)
         dismiss(animated: true)
     }
     
 }
-// TODO: Load data from backend
 
 extension ProfileController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -339,7 +335,12 @@ extension ProfileController: UITextFieldDelegate {
     
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
         if let text = rateField.text {
-            if let _ = Double(text) {
+            if let double = Double(text) {
+                let rate = String(double)
+                let userID = String(user.id)
+                NetworkManager.updateRate(userID: userID, rate: rate) { _ in
+                    
+                }
                 return true
             }
             showAlert()
