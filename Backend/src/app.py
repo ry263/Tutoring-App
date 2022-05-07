@@ -323,7 +323,7 @@ def get_notification(notification_id):
     """
     Endpoint for getting a notification.
     """
-    noti = User.query.filter_by(id=notification_id).first()
+    noti = Notification.query.filter_by(id=notification_id).first()
     if noti is None:
         return failure_response("Notification not found")
     return success_response(noti.serialize())
