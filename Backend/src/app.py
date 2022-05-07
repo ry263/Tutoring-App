@@ -202,7 +202,7 @@ def login():
         return failure_response("missing email, or password")
 
     was_successful, user = users_dao.verify_credentials(email, password)
-
+    
     if not was_successful:
         return failure_response("Incorrect information")
 
@@ -256,10 +256,20 @@ def secret_message():
     if not user or not user.verify_session_token(session_token):
         return failure_response("Invalid Session Token")
 
-    return success_response(
-        {"message":"You have successfully implemented sessions"}
-    )
+    return success_response(user.serialize())
 
+
+@app.route("/users/current/")
+def get_current_user():
+    was_successful, session_token = extract_token(request)
+
+    if not was_successful:
+        return session_token
+
+    user = users_dao.get_user_by_session_token(session_token)
+    if not user or not user.verify_session_token(session_token):
+        return failure_response("Invalid Session Token")
+    return success_response(user.serialize())
 
 
 @app.route("/api/courses/")
