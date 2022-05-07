@@ -306,13 +306,14 @@ def get_course(code):
     #     parsed_code = code[:space] + " " + code[space:]
 
     code.strip()
+    ind = 0
     for elem in code:
         try:
             if int(code[elem]) == type(int):
                 ind = elem
         except:
             continue
-
+        
     parsed_code = code[:ind-1] + " " + code[ind:]
     
 
