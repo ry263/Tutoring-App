@@ -414,8 +414,8 @@ def drop_user(course_id):
         return failure_response("User not found")
     #check user in lists
 
-    if user in course.instructors:
-        course.instructors.remove(user)
+    if user in course.tutors:
+        course.tutors.remove(user)
     else:
         return failure_response("User has not been added to this course")
     db.session.commit()
