@@ -76,10 +76,8 @@ class User(db.Model):
     availability = db.relationship("Availability", cascade = "delete")
     notifications = db.relationship("Notification", cascade = "delete")
     rate = db.Column(db.String, nullable=True)
-    profile_pic = db.Column(db.String,nullable = True)
-
+    profile_pic = db.Column(db.String,nullable = False)
     password_digest = db.Column(db.String, nullable=False)
-
     #Session information
     session_token = db.Column(db.String, nullable=False, unique=True)
     session_expiration = db.Column(db.DateTime, nullable=False)
