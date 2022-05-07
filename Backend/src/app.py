@@ -1,5 +1,7 @@
 
 import profile
+
+from sqlalchemy import desc
 from db import Notification
 from db import db
 from flask import Flask
