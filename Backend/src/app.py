@@ -297,8 +297,8 @@ def get_course(code):
     Endpoint for getting a course by code
     """
     code.strip()
-    code.replace("-"," ")
-    code.replace("_"," ")
+    code.replace("+"," ")
+    code.replace("%"," ")
     x = code.find(" ")
     space = (len(code) - 5)
     parsed_code = code
