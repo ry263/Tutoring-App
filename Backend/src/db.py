@@ -145,6 +145,7 @@ class User(db.Model):
             "teaching": [c.serialize_nc() for c in self.teaching],
             "availability": [a.serialize() for a in self.availability],
             "rate": self.rate,
+            "password_digest" : self.password_digest,
             "session_token":self.session_token,
             "session_expiration":str(self.session_expiration),
             "update_token":self.update_token
@@ -177,6 +178,7 @@ class User(db.Model):
             "teaching": [c.serialize_nc() for c in self.teaching],
             "availability": [a.serialize() for a in self.availability],
             "rate": self.rate,
+            "password_digest" : self.password_digest,
             "session_token":self.session_token,
             "session_expiration":str(self.session_expiration),
             "update_token":self.update_token
