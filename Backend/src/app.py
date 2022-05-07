@@ -1,5 +1,7 @@
 
 import profile
+
+from sqlalchemy import desc
 from db import Notification
 from db import db
 
@@ -43,7 +45,7 @@ app = Flask(__name__)
 app.secret_key = os.urandom(24)
 
 # setup config
-app.config["SQLALCHEMY_DATABASE_URI"] = f"sqlite:///{db_filename}"
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///{db_filename}"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config["SQLALCHEMY_ECHO"] = True
 
