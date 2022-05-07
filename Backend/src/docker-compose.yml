@@ -1,7 +1,7 @@
 version: "3"
 services:    
     pa5:        
-        image: ry263/tutoring-app
+        image: joshuajaquez/tutoring-app
         env_file: .env
         ports:                
             - "5000:5000"        
