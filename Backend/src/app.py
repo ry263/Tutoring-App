@@ -2,8 +2,11 @@
 import profile
 from db import Notification
 from db import db
+
+from sqlalchemy import desc
 from flask import Flask
 from flask import request
+from flask_sqlalchemy import SQLAlchemy
 import json
 import os
 from db import Availability
@@ -167,7 +170,7 @@ def register_account():
     Endpoint for registering a new user
     """
 
-    body = json.loads(request.body)
+    body = json.loads(request.data)
     email = body.get("email")
     password = body.get("password")
     name = body.get("name")
@@ -188,7 +191,7 @@ def login():
     """
     Endpoint for logging in a user
     """
-    body = json.loads(request.body)
+    body = json.loads(request.data)
     email = body.get("email")
     password = body.get("password")
 
