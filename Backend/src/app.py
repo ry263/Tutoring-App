@@ -316,7 +316,7 @@ def get_notifications():
     """
     Endpoint for getting all notifications.
     """
-    return success_response([n.serialize for n in Notification.query.all()])
+    return success_response([n.serialize() for n in Notification.query.all()])
 
 @app.route("/api/notifications/<int:notification_id>/")
 def get_notification(notification_id):
