@@ -1,7 +1,7 @@
 version: "3"
 services:    
     pa5:        
-        image: joshuajaquez/tutoring-app
+        image: lukman4/app
         env_file: .env
         ports:                
             - "5000:5000"        
