@@ -308,13 +308,10 @@ def get_course(code):
     code.strip()
     ind = 0
     for elem in code:
-        try:
-            if int(code[elem]) == type(int):
-                ind = elem
-                print(ind)
-                break
-        except:
-            continue
+        if code[elem] == type(int):
+            ind = elem
+            print(ind)
+            break
 
     parsed_code = code[:ind-1] + " " + code[ind:]
     print(parsed_code)
