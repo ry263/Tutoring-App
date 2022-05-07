@@ -140,7 +140,7 @@ class User(db.Model):
         return {        
             "id": self.id,               
             "name": self.name, 
-            "profile":self.profile_pic,   
+            "profile_pic":self.profile_pic,   
             "email": self.email,
             "teaching": [c.serialize_nc() for c in self.teaching],
             "availability": [a.serialize() for a in self.availability],
