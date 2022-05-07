@@ -3,27 +3,73 @@
 
 
 ## Backend API Specification
-###  User Functions
+### Authentication Functions
 #### Register new user
 ```POST /register/```
-
-#### Login
-```GET /```
+```
+Request
+{
+    "email": <USER INPUT>,
+    "password": <USER INPUT>,
+    "name": <USER INPUT>,
+    "profile pic": <USER INPUT>
+}
+```
 ```
 Response
 <HTTP STATUS CODE 201>
 {
-    "id": 1,
-    "name": "Rachel Yue",
-    "email": "ry263@cornell.edu",
-    "profile_pic": "url for profile pic",
-    "courses": [ <SERIALIZED COURSES WITHOUT USERS>, ... ],
-    "availability": [ <SERIALIZED TIMES>, ... ],
-    "notifications": [ <SERIALIZED NOTIFICATIONS>, ... ],
-    "rate": "20 per hour"
+    "session_token":user.session_token,
+    "session_expiration":str(user.session_expiration),
+    "update_token":user.update_token
+}
+```
+#### Login
+```POST /login/```
+```
+Request
+{
+    "email": <USER INPUT>,
+    "password": <USER INPUT>
+}
+```
+```
+Response
+<HTTP STATUS CODE 200>
+{
+    "session_token": User Session Token,
+    "session_expiration": User Session Expiration,
+    "update_token": User Update Token
+}
+```
+#### Update session
+```POST /session/```
+```
+Request
+{
+    "update_token": 
+}
+```
+```
+Response
+<HTTP STATUS CODE 200>
+{
+    "session_token": New User Session Token,
+    "session_expiration": New User Session Expiration,
+    "update_token": New User Update Token
+}
+```
+#### Verify session
+```POST /secret/```
+```
+Response
+<HTTP STATUS CODE 200>
+{
+    "message":"You have successfully implemented sessions"
 }
 ```
 
+###  User Functions
 #### Get all users
 ```GET /api/users/```
 ```
@@ -71,8 +117,6 @@ Response
     "rate": "20 per hour"
 }
 ```
-
-
 
 #### Get specific user
 ```GET /api/users/{user_id}/```
