@@ -300,7 +300,7 @@ def get_course(code):
     code.replace("-"," ")
     code.replace("_"," ")
     x = code.index(" ")
-    space = (code.length() - 5)
+    space = (len(code) - 5)
     if (x != space):
         parsed_code = code[:space] + " " + code[space:]
     course = Course.query.filter_by(code=parsed_code).first()
