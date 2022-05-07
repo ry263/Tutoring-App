@@ -166,6 +166,12 @@ def extract_token(request):
 
     return True, bearer_token
 
+@app.route("/")
+def hello():
+    "lom4 was here"
+    return ("lom4  was here") , 200
+
+
 @app.route("/register/", methods=["POST"])
 def register_account():
     """
