@@ -17,7 +17,7 @@ from db import User
 from flask import Flask, redirect, request, url_for, Request
 from oauthlib.oauth2 import WebApplicationClient
 import requests
-import users_dao
+#import users_dao
 from flask_login import (
     LoginManager,
     current_user,
@@ -188,7 +188,7 @@ def register_account():
 
         #return failure_response("user already exists")
 
-    return success_response(user.serialize_session(),201)
+    return success_response(user.serialize(),201)
 
 
 @app.route("/login/", methods=["POST"])
@@ -210,58 +210,58 @@ def login():
     if user == null or user.password_digest != password:
         return failure_response("Incorrect information")
 
-    return success_response(user.serialize_session())
-
-
-@app.route("/session/", methods=["POST"])
-def update_session():
-    """
-    Endpoint for updating a user's session
-    """
-    was_successful, update_token = extract_token(request)
-
-    if not was_successful:
-        return update_token
-
-    try:
-        user = users_dao.renew_session(update_token)
-    except Exception as e:
-        return failure_response("Invalid Update token: {str(e)}" )
-
-    return success_response(user.serialize_session())
-
-
-@app.route("/secret/", methods=["GET"])
-def secret_message():
-    """
-    Endpoint for verifying a session token and returning a secret message
-
-    In your project, you will use the same logic for any endpoint that needs
-    authentication
-    """
-    was_successful, session_token = extract_token(request)
-
-    if not was_successful:
-        return session_token
-
-    user = users_dao.get_user_by_session_token(session_token)
-    if not user or not user.verify_session_token(session_token):
-        return failure_response("Invalid Session Token")
-
-    return success_response(user.serialize_session())
-
-
-@app.route("/users/current/")
-def get_current_user():
-    was_successful, session_token = extract_token(request)
-
-    if not was_successful:
-        return session_token
-
-    user = users_dao.get_user_by_session_token(session_token)
-    if not user or not user.verify_session_token(session_token):
-        return failure_response("Invalid Session Token")
     return success_response(user.serialize())
+
+
+# @app.route("/session/", methods=["POST"])
+# def update_session():
+#     """
+#     Endpoint for updating a user's session
+#     """
+#     was_successful, update_token = extract_token(request)
+
+#     if not was_successful:
+#         return update_token
+
+#     try:
+#         user = users_dao.renew_session(update_token)
+#     except Exception as e:
+#         return failure_response("Invalid Update token: {str(e)}" )
+
+#     return success_response(user.serialize_session())
+
+
+# @app.route("/secret/", methods=["GET"])
+# def secret_message():
+#     """
+#     Endpoint for verifying a session token and returning a secret message
+
+#     In your project, you will use the same logic for any endpoint that needs
+#     authentication
+#     """
+#     was_successful, session_token = extract_token(request)
+
+#     if not was_successful:
+#         return session_token
+
+#     user = users_dao.get_user_by_session_token(session_token)
+#     if not user or not user.verify_session_token(session_token):
+#         return failure_response("Invalid Session Token")
+
+#     return success_response(user.serialize_session())
+
+
+# @app.route("/users/current/")
+# def get_current_user():
+#     was_successful, session_token = extract_token(request)
+
+#     if not was_successful:
+#         return session_token
+
+#     user = users_dao.get_user_by_session_token(session_token)
+#     if not user or not user.verify_session_token(session_token):
+#         return failure_response("Invalid Session Token")
+#     return success_response(user.serialize())
 
 
 @app.route("/api/courses/")
@@ -269,7 +269,7 @@ def get_courses():
     """
     Endpoint for getting all courses
     """
-    return success_response({"courses": [c.serialize() for c in Course.query.all()]})
+    return success_response([c.serialize() for c in Course.query.all()])
     
 @app.route("/api/courses/", methods=["POST"])
 def make_course():
