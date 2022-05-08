@@ -156,7 +156,7 @@ class TutorCell: UITableViewCell {
     
     func configure(user: User) {
         self.image.image = UIImage(named: user.profile_pic)
-        
+        self.name.text = user.name
     }
     
     func setUpConstraints() {

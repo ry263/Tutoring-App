@@ -28,7 +28,8 @@ class TabBar: UITabBarController {
             profileV.userViewing = self.user
             profileV.addTime = Availability(time: "+ Add a new time!", userID: user.id, ID: 1000000)
             
-            searchV = CourseController()
+            searchV = CourseController(num: 0, user: self.user!)
+            searchV.user = self.user
             notifV = NotificationController()
             notifV.user = self.user
             

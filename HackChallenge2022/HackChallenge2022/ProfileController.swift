@@ -216,10 +216,7 @@ class ProfileController: UIViewController {
     
     @objc func helpRequest() {
         
-        NetworkManager.createNotification(senderID: userViewing!.id, receiverID: user.id) { notif in
-            
-        }
-        
+        NetworkManager.createNotification(senderID: self.userViewing!.id, receiverID: self.user.id) { _ in}
         presentingViewController?.dismiss(animated: true)
         dismiss(animated: true)
     }
