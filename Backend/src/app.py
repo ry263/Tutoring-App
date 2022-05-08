@@ -449,13 +449,26 @@ def fill_courses():
     Endpoint for filling courses
     """
     subjects = requests.get("https://classes.cornell.edu/api/2.0/config/subjects.json?roster=SP22")
-    course_codes = subjects.json().get("value")
-    for code in course_codes:
-        cs = requests.get("https://classes.cornell.edu/api/2.0/search/classes.json?roster=FA14&subject=%s" % code)
-        classnbr = cs.json().get("catalogNBR")
-        new_course = Course(code = code+ " "+  classnbr)
-        db.session.add(new_course)
-        db.session.commit()
+    subjects = subjects.json()
+    courses = subjects.get("data")
+    course_code = courses.get("subjects")
+    for x in course_code:
+        r = x.get("value")
+        cs = requests.get("https://classes.cornell.edu/api/2.0/search/classes.json?roster=SP22&subject="+ r)
+        cs = cs.json()
+        data = cs.get("data")
+        classnbr = data.get("classes")
+        for num in classnbr:
+            numero = num.get("catalogNbr")
+            new_course = Course(code = r + " " + numero)
+            db.session.add(new_course)
+    db.session.commit()   
+    # for code in course_codes:
+    #     cs = requests.get("https://classes.cornell.edu/api/2.0/search/classes.json?roster=FA14&subject=%s" % code)
+    #     classnbr = cs.json().get("catalogNBR")
+    #     new_course = Course(code = code+ " "+  classnbr)
+    #     db.session.add(new_course)
+    #     db.session.commit()
     return success_response({"courses": [c.serialize() for c in Course.query.all()]})
 
 @app.route("/api/rate/<int:user_id>/", methods =["POST"])
