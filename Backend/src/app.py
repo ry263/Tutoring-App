@@ -304,6 +304,21 @@ def get_course(code):
         return failure_response("Course not found")
     return success_response(course.serialize())
 
+@app.route("/api/courses/users/<string:code>/")
+def get_tutors_for_course(code):
+    """
+    Endpoint for getting a course by code
+    """
+
+    parsed_code = code[:-4] + " " + code[-4:]
+    course = Course.query.filter_by(code=parsed_code).first()
+    
+    if course is None:
+        return failure_response("Course not found")
+    
+    return success_response([tutor.serialize for tutor in course.tutors]) 
+
+
 
 @app.route("/api/notifications/")
 def get_notifications():
