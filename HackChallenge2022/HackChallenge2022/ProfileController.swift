@@ -9,22 +9,6 @@ import Foundation
 import UIKit
 import Alamofire
 
-/** To-Do to integrate networking:
- 1 . getAllUserCourses to fill out classes that user is tutoring in
- 2. getAllNotifications to fill out notification table
- 3. Post request for notifications when user request help
- 3. Implement the search bar along with collectionview for displaying available tutors ( Will need a getByCourse
- method for users)
- 4. Post request to add to the tutoring array
- 5. Post request to add available times
- 6. Delete request to delete availability
- 7. Delete request to delete course
- 8. Set up authentication and login screen
- 9. Get request for getting the images of tutors ( If we need to drop the images idea then we can fill out the search results as a table rather than just displaying images of users)
- 10. Put, Get, and Post Request for rates
- */
-
-// If name equals "", then show persistent alert that asks for name
 
 class ProfileController: UIViewController {
     
@@ -163,15 +147,8 @@ class ProfileController: UIViewController {
             requestHelp.translatesAutoresizingMaskIntoConstraints = false
             view.addSubview(requestHelp)
             
-            requestSent.text = ""
-            requestSent.textAlignment = .center
-            requestSent.font = .systemFont(ofSize: 18, weight: .bold)
-            requestSent.translatesAutoresizingMaskIntoConstraints = false
-            view.addSubview(requestSent)
-            
             NSLayoutConstraint.activate([requestHelp.topAnchor.constraint(equalTo: rateField.bottomAnchor, constant: 2 * padding), requestHelp.bottomAnchor.constraint(equalTo: requestHelp.topAnchor, constant: 2 * padding), requestHelp.leadingAnchor.constraint(equalTo: rateField.leadingAnchor,constant: padding),requestHelp.trailingAnchor.constraint(equalTo: rateField.trailingAnchor, constant: -padding)])
             
-            NSLayoutConstraint.activate([requestSent.topAnchor.constraint(equalTo: requestHelp.bottomAnchor, constant: padding), requestSent.bottomAnchor.constraint(equalTo: requestSent.topAnchor, constant: 2 * padding), requestSent.leadingAnchor.constraint(equalTo: requestHelp.leadingAnchor, constant: padding), requestSent.trailingAnchor.constraint(equalTo: requestHelp.trailingAnchor, constant: padding)])
             
         }
         
@@ -216,11 +193,15 @@ class ProfileController: UIViewController {
     
     @objc func helpRequest() {
         
-        NetworkManager.createNotification(senderID: self.userViewing!.id, receiverID: self.user.id) { _ in}
-        presentingViewController?.dismiss(animated: true)
-        dismiss(animated: true)
+        let email = "foo@bar.com"
+        if let url = URL(string: "mailto:\(email)") {
+          if #available(iOS 10.0, *) {
+            UIApplication.shared.open(url)
+          } else {
+            UIApplication.shared.openURL(url)
+          }
+        }
     }
-    
 }
 
 extension ProfileController: UITableViewDataSource {

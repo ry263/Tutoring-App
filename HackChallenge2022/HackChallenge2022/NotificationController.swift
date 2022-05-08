@@ -40,13 +40,15 @@ class NotificationController: UIViewController {
         notifs.register(notifCell.self, forCellReuseIdentifier: reuseID)
         view.addSubview(notifs)
         
-        NetworkManager.getUserNotifications(userID: user.id) { notif in
+        NetworkManager.getUserNotifications(userID: self.user.id) { notif in
             self.notifArray = notif
         }
+        
         for notification in self.notifArray {
             NetworkManager.getUserData(userID: notification.sender_id) { user in
                 self.notifiers.append(user)
             }
+            print(self.notifiers.count)
         }
         
         setUpConstraints()

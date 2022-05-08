@@ -96,7 +96,6 @@ class CourseController: UIViewController {
 extension CourseController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedRow = courses[indexPath.row]
-        print(selectedRow.code)
         if index == 1 {
             let checkIn: Bool = parentController!.courses.contains(selectedRow)
             if  !checkIn {

@@ -30,19 +30,19 @@ class TabBar: UITabBarController {
             
             searchV = CourseController(num: 0, user: self.user!)
             searchV.user = self.user
-            notifV = NotificationController()
-            notifV.user = self.user
+//            notifV = NotificationController()
+//            notifV.user = self.user
             
-            let notifController = createNavContoller(vc: notifV, selectedImage: UIImage(named: "shadowNotif.png")! , unselectedImage: UIImage(named: "notif.png")!)
+//            let notifController = createNavContoller(vc: notifV, selectedImage: UIImage(named: "shadowNotif.png")! , unselectedImage: UIImage(named: "notif.png")!)
             
             
             let searchController = createNavContoller(vc: searchV, selectedImage: UIImage(named: "shadowSearch.png")! , unselectedImage: UIImage(named: "search.png")!)
             
             let profileController = createNavContoller(vc: profileV, selectedImage: UIImage(named: "shadowProfile.png")! , unselectedImage: UIImage(named: "profile.png")!)
             
-            viewControllers = [notifController, searchController, profileController]
+            viewControllers = [searchController, profileController]
             
-            self.selectedIndex = 2
+            self.selectedIndex = 1
         }
         
         
