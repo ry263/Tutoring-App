@@ -29,11 +29,6 @@ class TabBar: UITabBarController {
             profileV.addTime = Availability(time: "+ Add a new time!", userID: user.id, ID: 1000000)
             
             searchV = CourseController(num: 0, user: self.user!)
-            searchV.user = self.user
-//            notifV = NotificationController()
-//            notifV.user = self.user
-            
-//            let notifController = createNavContoller(vc: notifV, selectedImage: UIImage(named: "shadowNotif.png")! , unselectedImage: UIImage(named: "notif.png")!)
             
             
             let searchController = createNavContoller(vc: searchV, selectedImage: UIImage(named: "shadowSearch.png")! , unselectedImage: UIImage(named: "search.png")!)
