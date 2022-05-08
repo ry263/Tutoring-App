@@ -307,7 +307,7 @@ def get_course(code):
 @app.route("/api/courses/users/<string:code>/")
 def get_tutors_for_course(code):
     """
-    Endpoint for getting a course by code
+    Endpoint for getting tutors by course code
     """
 
     parsed_code = code[:-4] + " " + code[-4:]
@@ -316,7 +316,7 @@ def get_tutors_for_course(code):
     if course is None:
         return failure_response("Course not found")
     
-    return success_response([tutor.serialize for tutor in course.tutors]) 
+    return success_response([tutor.serialize() for tutor in course.tutors]) 
 
 
 
