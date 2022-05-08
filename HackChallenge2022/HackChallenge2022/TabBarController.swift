@@ -25,7 +25,6 @@ class TabBar: UITabBarController {
         
         if let user = self.user {
             profileV = ProfileController(ownAccount: true, user: self.user!)
-            profileV.userViewing = self.user
             profileV.addTime = Availability(time: "+ Add a new time!", userID: user.id, ID: 1000000)
             
             searchV = CourseController(num: 0, user: self.user!)

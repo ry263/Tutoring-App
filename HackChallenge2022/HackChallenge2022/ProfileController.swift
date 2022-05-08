@@ -14,7 +14,6 @@ class ProfileController: UIViewController {
     
     var ownAccount = true
     var user: User!
-    weak var userViewing: User?
     
     var profilePic = UIImageView()
     var name = UILabel()
@@ -193,7 +192,7 @@ class ProfileController: UIViewController {
     
     @objc func helpRequest() {
         
-        let email = "foo@bar.com"
+        let email = user.email
         if let url = URL(string: "mailto:\(email)") {
           if #available(iOS 10.0, *) {
             UIApplication.shared.open(url)

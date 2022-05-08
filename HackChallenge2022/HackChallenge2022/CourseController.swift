@@ -114,8 +114,6 @@ extension CourseController: UITableViewDelegate {
             let modText = selectedRow.code.replacingOccurrences(of: " ", with: "")
             NetworkManager.getCourse(courseCode: modText) { course in
                 let vc = TutorController(course: course)
-                // MARK: Fix
-                vc.userViewing = self.user
                 self.present(vc, animated: true, completion: nil)
             }
             

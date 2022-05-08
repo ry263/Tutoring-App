@@ -11,7 +11,6 @@ import UIKit
 class TutorController: UIViewController {
     
     weak var selectedCourse: Course!
-    weak var userViewing: User!
     var tutorCollection = UITableView()
     let reuse = "reuse"
     let courseTitle = UILabel()
@@ -69,8 +68,6 @@ extension TutorController: UITableViewDelegate {
         
         let selectedTutor = displayedTutors[indexPath.row]
         let vc = ProfileController(ownAccount: false, user: selectedTutor)
-        vc.userViewing = self.userViewing
-        //vc.addTime = Availability(time: "+ Add a new time!", userID: self.userViewing.id, ID: 1000000)
         present(vc, animated: true, completion: nil)
     }
 }
