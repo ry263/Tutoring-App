@@ -305,15 +305,15 @@ def get_course(code):
     # if (y != space):
     #     parsed_code = code[:space] + " " + code[space:]
 
-    code.strip()
-    ind = 0
-    for elem in code:
-        if elem == type(int):
-            ind = code.index(elem)
-            print(ind)
-            break
+    # code.strip()
+    # ind = 0
+    # for elem in code:
+    #     if elem == type(int):
+    #         ind = code.index(elem)
+    #         print(ind)
+    #         break
 
-    parsed_code = code[:ind-1] + " " + code[ind:]
+    parsed_code = code[:-4] + " " + code[-4:]
     print(parsed_code)
     course = Course.query.filter_by(code=parsed_code).first()
     print(course)
