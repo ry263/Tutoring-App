@@ -296,17 +296,28 @@ def get_course(code):
     """
     Endpoint for getting a course by code
     """
-    code.strip()
-    code.replace("-"," ")
-    code.replace("_"," ")
-    x = code.index(" ")
-    space = (code.length() - 5)
-    if (x != space):
-        parsed_code = code[:space] + " " + code[space:]
+
+    parsed_code = code[:-4] + " " + code[-4:]
     course = Course.query.filter_by(code=parsed_code).first()
+    
     if course is None:
         return failure_response("Course not found")
     return success_response(course.serialize())
+
+@app.route("/api/courses/users/<string:code>/")
+def get_tutors_for_course(code):
+    """
+    Endpoint for getting tutors by course code
+    """
+
+    parsed_code = code[:-4] + " " + code[-4:]
+    course = Course.query.filter_by(code=parsed_code).first()
+    
+    if course is None:
+        return failure_response("Course not found")
+    
+    return success_response([tutor.serialize() for tutor in course.tutors]) 
+
 
 
 @app.route("/api/notifications/")
@@ -314,14 +325,14 @@ def get_notifications():
     """
     Endpoint for getting all notifications.
     """
-    return success_response([n.serialize for n in Notification.query.all()])
+    return success_response([n.serialize() for n in Notification.query.all()])
 
 @app.route("/api/notifications/<int:notification_id>/")
 def get_notification(notification_id):
     """
     Endpoint for getting a notification.
     """
-    noti = User.query.filter_by(id=notification_id).first()
+    noti = Notification.query.filter_by(id=notification_id).first()
     if noti is None:
         return failure_response("Notification not found")
     return success_response(noti.serialize())
@@ -352,7 +363,7 @@ def get_notifications_for_user(user_id):
     if user is None:
         return failure_response("User not found")
     notifications = Notification.query.filter_by(receiver_id=user_id).order_by(desc(Notification.time)).all()
-    return success_response([n.serialize for n in notifications])
+    return success_response([n.serialize() for n in notifications])
 
 @app.route("/api/users/<int:user_id>/")
 def get_user(user_id):
@@ -412,8 +423,8 @@ def drop_user(course_id):
         return failure_response("User not found")
     #check user in lists
 
-    if user in course.instructors:
-        course.instructors.remove(user)
+    if user in course.tutors:
+        course.tutors.remove(user)
     else:
         return failure_response("User has not been added to this course")
     db.session.commit()
@@ -445,7 +456,7 @@ def add_availablility(user_id):
     )
     db.session.add(new_av)
     db.session.commit()
-    return success_response(new_av.serialize_nc, 201)
+    return success_response(new_av.serialize(), 201)
 
 @app.route("/api/allcourses/", methods=["POST"])
 def fill_courses():
@@ -453,14 +464,27 @@ def fill_courses():
     Endpoint for filling courses
     """
     subjects = requests.get("https://classes.cornell.edu/api/2.0/config/subjects.json?roster=SP22")
-    course_codes = subjects.json().get("value")
-    for code in course_codes:
-        cs = requests.get("https://classes.cornell.edu/api/2.0/search/classes.json?roster=FA14&subject=%s" % code)
-        classnbr = cs.json().get("catalogNBR")
-        new_course = Course(code = code+ " "+  classnbr)
-        db.session.add(new_course)
-        db.session.commit()
-    return success_response({"courses": [c.serialize() for c in Course.query.all()]})
+    subjects = subjects.json()
+    courses = subjects.get("data")
+    course_code = courses.get("subjects")
+    for x in course_code:
+        r = x.get("value")
+        cs = requests.get("https://classes.cornell.edu/api/2.0/search/classes.json?roster=SP22&subject="+ r)
+        cs = cs.json()
+        data = cs.get("data")
+        classnbr = data.get("classes")
+        for num in classnbr:
+            numero = num.get("catalogNbr")
+            new_course = Course(code = r + " " + numero)
+            db.session.add(new_course)
+    db.session.commit()   
+    # for code in course_codes:
+    #     cs = requests.get("https://classes.cornell.edu/api/2.0/search/classes.json?roster=FA14&subject=%s" % code)
+    #     classnbr = cs.json().get("catalogNBR")
+    #     new_course = Course(code = code+ " "+  classnbr)
+    #     db.session.add(new_course)
+    #     db.session.commit()
+    return success_response([c.serialize() for c in Course.query.all()])
 
 @app.route("/api/rate/<int:user_id>/", methods =["POST"])
 def add_rate(user_id):

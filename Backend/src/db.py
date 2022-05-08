@@ -76,7 +76,7 @@ class User(db.Model):
     availability = db.relationship("Availability", cascade = "delete")
     notifications = db.relationship("Notification", cascade = "delete")
     rate = db.Column(db.String, nullable=True)
-    profile_pic = db.Column(db.String,nullable = True)
+    profile_pic = db.Column(db.String,nullable = False)
 
     password_digest = db.Column(db.String, nullable=False)
 
@@ -140,11 +140,13 @@ class User(db.Model):
         return {        
             "id": self.id,               
             "name": self.name, 
-            "image":self.profile_pic,   
+            "profile_pic":self.profile_pic,   
             "email": self.email,
-            "courses": [c.serialize_nc() for c in self.teaching],
+            "teaching": [c.serialize_nc() for c in self.teaching],
             "availability": [a.serialize() for a in self.availability],
+            "notifications": [n.serialize() for n in self.notifications],
             "rate": self.rate,
+            #"password_digest" : self.password_digest,
             "session_token":self.session_token,
             "session_expiration":str(self.session_expiration),
             "update_token":self.update_token
@@ -160,9 +162,18 @@ class User(db.Model):
         """ 
         return {        
             "id": self.id,               
-            "name": self.name,    
+            "name": self.name, 
+            "profile_pic":self.profile_pic,   
             "email": self.email,
-            "rate":self.rate
+            "rate":self.rate,
+            "teaching":[],
+            "availability": [a.serialize() for a in self.availability],
+            "notifications": [n.serialize() for n in self.notifications],
+            "rate": self.rate,
+            #"password_digest" : self.password_digest,
+            "session_token":self.session_token,
+            "session_expiration":str(self.session_expiration),
+            "update_token":self.update_token
         }
 
     def serialize_session(self):   
@@ -172,11 +183,13 @@ class User(db.Model):
         return {        
             "id": self.id,               
             "name": self.name, 
-            "image":self.profile_pic,   
+            "profile_pic":self.profile_pic,   
             "email": self.email,
-            "courses": [c.serialize_nc() for c in self.teaching],
+            "teaching": [c.serialize_nc() for c in self.teaching],
             "availability": [a.serialize() for a in self.availability],
+            "notifications": [n.serialize() for n in self.notifications],
             "rate": self.rate,
+            #"password_digest" : self.password_digest,
             "session_token":self.session_token,
             "session_expiration":str(self.session_expiration),
             "update_token":self.update_token
@@ -236,7 +249,7 @@ class Notification(db.Model):
         """
         self.sender_id = kwargs.get("sender_id", "")
         self.receiver_id = kwargs.get("receiver_id", "")
-        self.time = datetime.datetime.utcnow
+        self.time = datetime.datetime.utcnow()
     
     def serialize(self):   
         """

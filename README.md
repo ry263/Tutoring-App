@@ -376,5 +376,34 @@ Response
 }
 ```
 
-
+### Get all tutors for a course
+```GET /api/courses/users/{string(code)}/```
+```
+Response
+<HTTP STATUS CODE 200>
+{
+    "users" : [
+        {
+            "id": 1,
+            "name": "Rachel Yue",
+            "email": "ry263@cornell.edu",
+            "profile_pic": "url for profile pic",
+            "courses": [ <SERIALIZED COURSES WITHOUT USERS>, ... ],
+            "availability": [ <SERIALIZED TIMES>, ... ],
+            "notifications": [ <SERIALIZED NOTIFICATIONS>, ... ],
+            "rate": "20 per hour"
+        },
+        {
+            "id": 2,
+            "name": "Luk Man",
+            "email": "ry263@cornell.edu",
+            "profile_pic": "url for profile pic",
+            "courses": [ <SERIALIZED COURSES WITHOUT USERS>, ... ],
+            "availability": [ <SERIALIZED TIMES>, ... ],
+            "notifications": [ <SERIALIZED NOTIFICATIONS>, ... ],
+            "rate": "20 per hour"
+        }
+    ]
+}
+```
 
