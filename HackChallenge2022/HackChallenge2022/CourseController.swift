@@ -17,7 +17,6 @@ class CourseController: UIViewController {
     var index: Int = 0
     var courses : [Course] = []
     
-    
     var searchController: UISearchController!
     private var resultsTableController: ResultsTableController!
     
@@ -30,15 +29,10 @@ class CourseController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        
         view.clipsToBounds = true
-        
         navigationItem.titleView?.backgroundColor = .clear
         
-        NetworkManager.getAllCourses() { courses in
-            self.courses = courses
-            self.resultsTableController.tableView.reloadData()
-        }
+        
         
         if index == 1 {
             extraText.text = "Search for Cornell Courses to tutor in!"
@@ -121,7 +115,8 @@ extension CourseController: UITableViewDelegate {
             let modText = selectedRow.code.replacingOccurrences(of: " ", with: "")
             NetworkManager.getCourse(courseCode: modText) { course in
                 let vc = TutorController(course: course)
-                vc.userViewing = self.parentController?.userViewing
+                // MARK: Fix
+                vc.userViewing = self.user
                 self.present(vc, animated: true, completion: nil)
             }
             

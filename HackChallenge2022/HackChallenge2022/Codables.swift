@@ -60,12 +60,13 @@ class Course: Codable {
 }
 
 class Notification: Codable {
+
     var id: Int
     var sender_id: Int
     var receiver_id: Int
     var time: String
     
-    init(image: String, senderID: Int, receiverID: Int, ID: Int, time: String) {
+    init(image: String, senderID: Int, receiverID: Int, ID: Int, time: String, note: String) {
         self.sender_id = senderID
         self.receiver_id = receiverID
         self.id = ID

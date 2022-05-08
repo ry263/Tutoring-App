@@ -16,6 +16,7 @@ class NotificationController: UIViewController {
     var notifs = UITableView()
     var notifArray : [Notification] = []
     var reuseID = "Notification"
+    var notifiers : [User] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,6 +43,11 @@ class NotificationController: UIViewController {
         NetworkManager.getUserNotifications(userID: user.id) { notif in
             self.notifArray = notif
         }
+        for notification in self.notifArray {
+            NetworkManager.getUserData(userID: notification.sender_id) { user in
+                self.notifiers.append(user)
+            }
+        }
         
         setUpConstraints()
     }
@@ -58,20 +64,16 @@ class NotificationController: UIViewController {
 
 extension NotificationController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        notifArray.count
+        return self.notifiers.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: reuseID, for: indexPath) as? notifCell {
-            let notification = notifArray[indexPath.row]
-            let id = notification.sender_id
-            NetworkManager.getUserData(userID: id) { User in
-                let sender = User
-                cell.configure(image: sender.profile_pic, user: sender)
-                cell.selectionStyle = .none
-            }
-            return cell
             
+            let notifier = self.notifiers[indexPath.row]
+            cell.configure(user: notifier)
+            cell.selectionStyle = .none
+            return cell
         }
         else {
             return UITableViewCell()
@@ -102,8 +104,8 @@ class notifCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    func configure(image: String, user: User) {
-        self.image.image = UIImage(named: image)
+    func configure(user: User) {
+        self.image.image = UIImage(named: "profile.png")
         self.label.text = "\(user.email) reached out"
     }
     
