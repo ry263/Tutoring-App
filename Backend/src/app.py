@@ -478,12 +478,6 @@ def fill_courses():
             new_course = Course(code = r + " " + numero)
             db.session.add(new_course)
     db.session.commit()   
-    # for code in course_codes:
-    #     cs = requests.get("https://classes.cornell.edu/api/2.0/search/classes.json?roster=FA14&subject=%s" % code)
-    #     classnbr = cs.json().get("catalogNBR")
-    #     new_course = Course(code = code+ " "+  classnbr)
-    #     db.session.add(new_course)
-    #     db.session.commit()
     return success_response([c.serialize() for c in Course.query.all()])
 
 @app.route("/api/rate/<int:user_id>/", methods =["POST"])
