@@ -118,6 +118,7 @@ class LogOn: UIViewController {
         emailField.borderStyle = .none
         emailField.delegate = self
         emailField.autocapitalizationType = .none
+        emailField.autocorrectionType = .no
         emailField.textAlignment = .center
         emailField.backgroundColor = UIColor(red: 0.91, green: 0.92, blue: 0.72, alpha: 1.00)
         emailField.translatesAutoresizingMaskIntoConstraints = false
@@ -127,6 +128,7 @@ class LogOn: UIViewController {
         passField.delegate = self
         passField.borderStyle = .none
         passField.autocapitalizationType = .none
+        passField.autocorrectionType = .no
         passField.textAlignment = .center
         passField.backgroundColor = UIColor(red: 0.91, green: 0.92, blue: 0.72, alpha: 1.00)
         passField.translatesAutoresizingMaskIntoConstraints = false
@@ -181,7 +183,6 @@ extension LogOn: UITextFieldDelegate {
                         self.parentController.window?.rootViewController = vc
                         return
                     }
-                    showAlert()
                     return
                 }
                 showAlert()
@@ -216,6 +217,7 @@ class SignUp: UIViewController {
         emailField.delegate = self
         emailField.borderStyle = .none
         emailField.autocapitalizationType = .none
+        emailField.autocorrectionType = .no
         emailField.textAlignment = .center
         emailField.backgroundColor = UIColor(red: 0.91, green: 0.92, blue: 0.72, alpha: 1.00)
         emailField.translatesAutoresizingMaskIntoConstraints = false
@@ -225,6 +227,7 @@ class SignUp: UIViewController {
         passField.delegate = self
         passField.borderStyle = .none
         passField.autocapitalizationType = .none
+        passField.autocorrectionType = .no
         passField.textAlignment = .center
         passField.backgroundColor = UIColor(red: 0.91, green: 0.92, blue: 0.72, alpha: 1.00)
         passField.translatesAutoresizingMaskIntoConstraints = false
@@ -243,6 +246,7 @@ class SignUp: UIViewController {
         nameField.layer.cornerRadius = 10
         nameField.delegate = self
         nameField.textAlignment = .center
+        nameField.autocorrectionType = .no
         nameField.autocapitalizationType = .none
         nameField.backgroundColor = UIColor(red: 0.91, green: 0.92, blue: 0.72, alpha: 1.00)
         nameField.borderStyle = .none

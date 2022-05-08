@@ -12,8 +12,7 @@ class TutorController: UIViewController {
     
     weak var selectedCourse: Course!
     weak var userViewing: User!
-    let flowLayout = UICollectionViewFlowLayout()
-    var tutorCollection = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
+    var tutorCollection = UITableView()
     let reuse = "reuse"
     let courseTitle = UILabel()
     var displayedTutors : [User] = []
@@ -29,39 +28,26 @@ class TutorController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .white
-        
-//        selectedCourse.tutors.append(Josh)
-//        selectedCourse.tutors.append(Joel)
-//        selectedCourse.tutors.append(Lukman)
-//        displayedTutors = getTutors(course: selectedCourse)
+        self.view.backgroundColor = .white
         
         let modText = selectedCourse.code.replacingOccurrences(of: " ", with: "")
-        NetworkManager.getCourse(courseCode: modText) { course in
-            self.displayedTutors = course.tutors!
+        NetworkManager.getTutors(courseCode: modText) { users in
+            self.displayedTutors = users
         }
         
-        courseTitle.font = .systemFont(ofSize: 24, weight: .bold)
-        courseTitle.textAlignment = .center
-        courseTitle.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(courseTitle)
         
-        flowLayout.scrollDirection = .vertical
-        flowLayout.minimumLineSpacing = tutorSpacing
-        flowLayout.minimumInteritemSpacing = tutorSpacing
+        self.courseTitle.font = .systemFont(ofSize: 24, weight: .bold)
+        self.courseTitle.textAlignment = .center
+        self.courseTitle.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(self.courseTitle)
         
-        tutorCollection = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
-        tutorCollection.delegate = self
-        tutorCollection.dataSource = self
-        tutorCollection.translatesAutoresizingMaskIntoConstraints = false
-        tutorCollection.register(TutorCell.self, forCellWithReuseIdentifier: reuse)
-        view.addSubview(tutorCollection)
+        self.tutorCollection.delegate = self
+        self.tutorCollection.dataSource = self
+        self.tutorCollection.register(TutorCell.self, forCellReuseIdentifier: reuse)
+        self.tutorCollection.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(self.tutorCollection)
         
         setUpConstraints()
-    }
-    
-    func getTutors(course: Course) -> [User] {
-        return course.tutors!
     }
     
     func setUpConstraints() {
@@ -71,45 +57,36 @@ class TutorController: UIViewController {
         NSLayoutConstraint.activate([tutorCollection.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20), tutorCollection.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20), tutorCollection.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 40), tutorCollection.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 20)])
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        tutorCollection.reloadData()
+    }
+    
 }
 
-extension TutorController: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+extension TutorController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         let selectedTutor = displayedTutors[indexPath.row]
         let vc = ProfileController(ownAccount: false, user: selectedTutor)
         vc.userViewing = userViewing
         vc.addTime = Availability(time: "+ Add a new time!", userID: userViewing.id, ID: 1000000)
         present(vc, animated: true, completion: nil)
-        
-        
     }
 }
-extension TutorController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-            let padding: CGFloat =  50
-            let collectionViewSize = collectionView.frame.size.width - padding
-            
-            return CGSize(width: collectionViewSize/2, height: collectionViewSize/2)
-        }
-    
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return displayedTutors.count/2
+extension TutorController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        self.displayedTutors.count
     }
-
-
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return displayedTutors.count
-    }
-
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuse, for: indexPath) as? TutorCell {
-            let tutor = displayedTutors[indexPath.row]
-            cell.configure(userPic: tutor.profile_pic)
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        print(self.displayedTutors.count)
+        if let cell = tableView.dequeueReusableCell(withIdentifier: reuse, for: indexPath) as? TutorCell {
+            let tutor = self.displayedTutors[indexPath.row]
+            cell.configure(user: tutor)
             return cell
         }
-        return UICollectionViewCell()
+        return UITableViewCell()
     }
-    
 }
+    
     

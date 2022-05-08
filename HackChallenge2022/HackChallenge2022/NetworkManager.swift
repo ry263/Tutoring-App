@@ -10,7 +10,7 @@ import Alamofire
 
 class NetworkManager {
     
-    static let host = "http://34.130.13.109"
+    static let host = "http://34.95.4.201"
     
     
     // MARK: Course functions
@@ -93,23 +93,26 @@ class NetworkManager {
         }
     }
     
-//    static func getCourseTutors(code: String, completion: @escaping ([User]) -> Void) {
-//        let endpoint = "\(host)/coursetutors/\(code)"
-//
-//        AF.request(endpoint, method: .get).validate().responseData { response in
-//            switch response.result {
-//                case .success(let data):
-//                    let jsonDecoder = JSONDecoder()
-//                    if let userResponse = try? jsonDecoder.decode([User].self, from: data) {
-//                        completion(userResponse)
-//                    } else {
-//                        print("failed to decode getCourseTutors")
-//                    }
-//                case .failure(let error):
-//                    print(error.localizedDescription)
-//            }
-//        }
-//    }
+    static func getTutors(courseCode: String, completion: @escaping ([User]) -> Void) {
+        
+        let endpoint = "\(host)/api/courses/users/\(courseCode)/"
+        
+        AF.request(endpoint, method: .get).validate().responseData { response in
+            switch response.result {
+                case .success(let data):
+                    let jsonDecoder = JSONDecoder()
+                    if let userResponse = try? jsonDecoder.decode([User].self, from: data) {
+                        completion(userResponse)
+                    } else {
+                        print("failed to decode getTutors")
+                    }
+                case .failure(let error):
+                    print(error.localizedDescription)
+            }
+        }
+    }
+    
+
     
     static func addTutor(courseID: String, userID: String, completion: @escaping (Course) -> Void){
         
@@ -174,25 +177,6 @@ class NetworkManager {
             }
         }
     }
-    
-//    static func getCurrentUser(completion: @escaping (User) -> Void){
-//
-//        let endpoint = "\(host)/api/users/current/"
-//
-//        AF.request(endpoint, method: .get).validate().responseData { response in
-//            switch response.result {
-//                case.success(let data):
-//                    let jsonDecoder = JSONDecoder()
-//                    if let userResponse = try? jsonDecoder.decode(User.self, from: data) {
-//                        completion(userResponse)
-//                    } else {
-//                        print("Failed to decode getCurrentUser")
-//                    }
-//                case.failure(let error):
-//                    print(error.localizedDescription)
-//            }
-//        }
-//    }
     
     static func updateRate(userID: String, rate: String, completion: @escaping (User) -> Void) {
         

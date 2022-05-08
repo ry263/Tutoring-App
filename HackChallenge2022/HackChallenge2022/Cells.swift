@@ -128,18 +128,24 @@ class SearchCell: UITableViewCell {
     }
 }
 
-class TutorCell: UICollectionViewCell {
+class TutorCell: UITableViewCell {
     
     var image = UIImageView()
+    var name = UILabel()
     
-    override init(frame: CGRect) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         
-        super.init(frame: frame)
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         image.layer.cornerRadius = 100.0
         image.contentMode = .scaleAspectFit
         image.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(image)
+        
+        name.font = .systemFont(ofSize: 18)
+        name.textColor = .black
+        name.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubview(name)
         
         setUpConstraints()
     }
@@ -148,11 +154,14 @@ class TutorCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configure(userPic: String) {
-        self.image.image = UIImage(named: userPic)
+    func configure(user: User) {
+        self.image.image = UIImage(named: user.profile_pic)
+        
     }
     
     func setUpConstraints() {
-        NSLayoutConstraint.activate([image.topAnchor.constraint(equalTo: contentView.topAnchor), image.bottomAnchor.constraint(equalTo: contentView.bottomAnchor), image.centerXAnchor.constraint(equalTo: contentView.centerXAnchor), image.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 40), image.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -40)])
+        NSLayoutConstraint.activate([image.topAnchor.constraint(equalTo: contentView.topAnchor), image.bottomAnchor.constraint(equalTo: contentView.bottomAnchor), image.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20), image.trailingAnchor.constraint(equalTo: image.leadingAnchor, constant: 40)])
+        
+        NSLayoutConstraint.activate([name.leadingAnchor.constraint(equalTo: image.trailingAnchor, constant: 20), name.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10), name.bottomAnchor.constraint(equalTo: name.topAnchor, constant: 40), name.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)])
     }
 }

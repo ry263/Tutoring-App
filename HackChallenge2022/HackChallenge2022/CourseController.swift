@@ -35,6 +35,11 @@ class CourseController: UIViewController {
         
         navigationItem.titleView?.backgroundColor = .clear
         
+        NetworkManager.getAllCourses() { courses in
+            self.courses = courses
+            self.resultsTableController.tableView.reloadData()
+        }
+        
         if index == 1 {
             extraText.text = "Search for Cornell Courses to tutor in!"
         } else {
@@ -43,10 +48,6 @@ class CourseController: UIViewController {
         
         let centerY = self.view.center.y - 52.75
         let centerX = self.view.center.x - 65
-        
-        NetworkManager.getAllCourses() { courses in
-            self.courses = courses
-        }
         
         extraText.frame = CGRect(x: centerX, y: centerY, width: 130, height: 105.5)
         extraText.textAlignment = .center
@@ -93,6 +94,7 @@ class CourseController: UIViewController {
         alert.addAction(UIAlertAction(title: "Ok", style: .cancel))
         present(alert,animated: true,completion: nil)
     }
+    
 }
 
 // MARK: Networking Request
@@ -116,9 +118,13 @@ extension CourseController: UITableViewDelegate {
                 showAlert()
             }
         } else {
-            let vc = TutorController(course: selectedRow)
-            vc.userViewing = parentController?.userViewing
-            present(vc, animated: true, completion: nil)
+            let modText = selectedRow.code.replacingOccurrences(of: " ", with: "")
+            NetworkManager.getCourse(courseCode: modText) { course in
+                let vc = TutorController(course: course)
+                vc.userViewing = self.parentController?.userViewing
+                self.present(vc, animated: true, completion: nil)
+            }
+            
         }
     }
 }
