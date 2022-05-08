@@ -20,12 +20,34 @@ class NetworkManager {
         
         AF.request(endpoint, method: .get).validate().responseData { response in
             switch response.result {
-                case.success(let data):
+                case .success(let data):
                     let jsonDecoder = JSONDecoder()
-                    if let userResponse = try? jsonDecoder.decode( [Course].self , from: data) {
+                    
+                    if let userResponse = try? jsonDecoder.decode([Course].self, from: data) {
                         completion(userResponse)
                     } else {
-                        print("failed to decode getAllCourses")
+                        print("Failed to decode getAllCourses")
+                    }
+                case .failure(let error):
+                    print(error.localizedDescription)
+            }
+        }
+    }
+    
+    static func makeCourse(code: String, completion: @escaping (Course) -> Void) {
+        let endpoint = "\(host)/api/courses/"
+        let params: [ String : String] = [
+            "code" : code
+        ]
+        
+        AF.request(endpoint, method: .post,parameters: params,encoder: JSONParameterEncoder.default).validate().responseData { (response) in
+            switch response.result {
+                case .success(let data):
+                    let jsonDecoder = JSONDecoder()
+                    if let userResponse = try? jsonDecoder.decode(Course.self, from: data) {
+                        completion(userResponse)
+                    } else {
+                        print("Failed to decode makeCourse")
                     }
                 case .failure(let error):
                     print(error.localizedDescription)
@@ -71,23 +93,23 @@ class NetworkManager {
         }
     }
     
-    static func getCourseTutors(code: String, completion: @escaping ([User]) -> Void) {
-        let endpoint = "\(host)/coursetutors/\(code)"
-        
-        AF.request(endpoint, method: .get).validate().responseData { response in
-            switch response.result {
-                case .success(let data):
-                    let jsonDecoder = JSONDecoder()
-                    if let userResponse = try? jsonDecoder.decode([User].self, from: data) {
-                        completion(userResponse)
-                    } else {
-                        print("failed to decode getCourseTutors")
-                    }
-                case .failure(let error):
-                    print(error.localizedDescription)
-            }
-        }
-    }
+//    static func getCourseTutors(code: String, completion: @escaping ([User]) -> Void) {
+//        let endpoint = "\(host)/coursetutors/\(code)"
+//
+//        AF.request(endpoint, method: .get).validate().responseData { response in
+//            switch response.result {
+//                case .success(let data):
+//                    let jsonDecoder = JSONDecoder()
+//                    if let userResponse = try? jsonDecoder.decode([User].self, from: data) {
+//                        completion(userResponse)
+//                    } else {
+//                        print("failed to decode getCourseTutors")
+//                    }
+//                case .failure(let error):
+//                    print(error.localizedDescription)
+//            }
+//        }
+//    }
     
     static func addTutor(courseID: String, userID: String, completion: @escaping (Course) -> Void){
         
@@ -134,7 +156,7 @@ class NetworkManager {
     
     // MARK: User methods and Login
     
-    static func getUserData(userID: String, completion: @escaping (User) -> Void) {
+    static func getUserData(userID: Int, completion: @escaping (User) -> Void) {
         
         let endpoint = "\(host)/api/users/\(userID)/"
         
@@ -153,29 +175,29 @@ class NetworkManager {
         }
     }
     
-    static func getCurrentUser(completion: @escaping (User) -> Void){
-        
-        let endpoint = "\(host)/api/users/current/"
-        
-        AF.request(endpoint, method: .get).validate().responseData { response in
-            switch response.result {
-                case.success(let data):
-                    let jsonDecoder = JSONDecoder()
-                    if let userResponse = try? jsonDecoder.decode(User.self, from: data) {
-                        completion(userResponse)
-                    } else {
-                        print("Failed to decode getCurrentUser")
-                    }
-                case.failure(let error):
-                    print(error.localizedDescription)
-            }
-        }
-    }
+//    static func getCurrentUser(completion: @escaping (User) -> Void){
+//
+//        let endpoint = "\(host)/api/users/current/"
+//
+//        AF.request(endpoint, method: .get).validate().responseData { response in
+//            switch response.result {
+//                case.success(let data):
+//                    let jsonDecoder = JSONDecoder()
+//                    if let userResponse = try? jsonDecoder.decode(User.self, from: data) {
+//                        completion(userResponse)
+//                    } else {
+//                        print("Failed to decode getCurrentUser")
+//                    }
+//                case.failure(let error):
+//                    print(error.localizedDescription)
+//            }
+//        }
+//    }
     
     static func updateRate(userID: String, rate: String, completion: @escaping (User) -> Void) {
         
-        let endpoint = "\(host)/api/rate/\(userID)"
-        let params: [String: String] = [
+        let endpoint = "\(host)/api/rate/\(userID)/"
+        let params: [String : String] = [
             "rate": rate
         ]
         
@@ -218,36 +240,6 @@ class NetworkManager {
         }
     }
     
-    static func updateSession(update_token: String, completion: @escaping (User) -> Void) {
-        
-//        let endpoint = "\(host)/session/"
-//        var headers: HTTPHeader =
-//        [ "Authorization" : update_token ]
-//
-//        AF.request(endpoint, method: .get, headers: headers).validate().responseData {
-//            _ in
-//        }
-        
-        
-        
-        
-        
-        
-//        AF.request(endpoint, method: .post, parameters: [:], encoder: JSONEncoder(), headers: headers).validate().responseData { response in
-//            switch response.result {
-//                case .success(let data) :
-//                    let jsonDecoder = JSONDecoder()
-//                    if let userResponse = try? jsonDecoder.decode(User.self, from: data) {
-//                        completion(userResponse)
-//                    } else {
-//                        print("Failed to decode updateSession")
-//                    }
-//                case .failure(let error):
-//                    print(error.localizedDescription)
-//            }
-//        }
-    }
-    
     static func registerUser(email: String, password: String, name: String, profile_pic: String, completion: @escaping (User) -> Void) {
         
         let endpoint = "\(host)/register/"
@@ -258,7 +250,7 @@ class NetworkManager {
             "profile_pic" : profile_pic
         ]
         
-        AF.request(endpoint, method: .post, parameters: params, encoder: JSONParameterEncoder.json).validate().responseData { response in
+        AF.request(endpoint, method: .post, parameters: params, encoder: JSONParameterEncoder.default).validate().responseData { response in
             switch response.result {
                 case .success(let data):
                     let jsonDecoder = JSONDecoder()

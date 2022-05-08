@@ -36,6 +36,11 @@ class TutorController: UIViewController {
 //        selectedCourse.tutors.append(Lukman)
 //        displayedTutors = getTutors(course: selectedCourse)
         
+        let modText = selectedCourse.code.replacingOccurrences(of: " ", with: "")
+        NetworkManager.getCourse(courseCode: modText) { course in
+            self.displayedTutors = course.tutors!
+        }
+        
         courseTitle.font = .systemFont(ofSize: 24, weight: .bold)
         courseTitle.textAlignment = .center
         courseTitle.translatesAutoresizingMaskIntoConstraints = false
@@ -56,7 +61,7 @@ class TutorController: UIViewController {
     }
     
     func getTutors(course: Course) -> [User] {
-        return course.tutors
+        return course.tutors!
     }
     
     func setUpConstraints() {
@@ -68,12 +73,10 @@ class TutorController: UIViewController {
     
 }
 
-// TODO: Load selected tutor information from backend
 extension TutorController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let selectedTutor = displayedTutors[indexPath.row]
         let vc = ProfileController(ownAccount: false, user: selectedTutor)
-        // Send getUserbyID request
         vc.userViewing = userViewing
         vc.addTime = Availability(time: "+ Add a new time!", userID: userViewing.id, ID: 1000000)
         present(vc, animated: true, completion: nil)
@@ -81,7 +84,6 @@ extension TutorController: UICollectionViewDelegate {
         
     }
 }
-// TODO: Load tutors from backend
 extension TutorController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

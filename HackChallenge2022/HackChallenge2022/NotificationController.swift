@@ -64,18 +64,19 @@ extension NotificationController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: reuseID, for: indexPath) as? notifCell {
             let notification = notifArray[indexPath.row]
-            // MARK: Get sender by ID
-            
-            let user = self.user
-            cell.configure(image: user!.profile_pic, user: user!)
-            cell.selectionStyle = .none
+            let id = notification.sender_id
+            NetworkManager.getUserData(userID: id) { User in
+                let sender = User
+                cell.configure(image: sender.profile_pic, user: sender)
+                cell.selectionStyle = .none
+            }
             return cell
+            
         }
         else {
             return UITableViewCell()
         }
     }
-    
 }
 
 class notifCell: UITableViewCell {

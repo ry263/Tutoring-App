@@ -29,15 +29,8 @@ import Alamofire
 class ProfileController: UIViewController {
     
     var ownAccount = true
-    weak var user: User!
+    var user: User!
     weak var userViewing: User?
-        
-    convenience init(ownAccount: Bool, user: User) {
-        self.init()
-        
-        self.user = user
-        self.ownAccount = ownAccount
-    }
     
     var profilePic = UIImageView()
     var name = UILabel()
@@ -65,23 +58,32 @@ class ProfileController: UIViewController {
     var courses : [Course] = []
     var times : [Availability] = []
     
+    convenience init(ownAccount: Bool, user: User) {
+        self.init()
+        
+        self.user = user
+        self.ownAccount = ownAccount
+    }
+    
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         view.backgroundColor = .white
+        
         
         profilePic.image = UIImage(named: "profile.png")
         profilePic.layer.cornerRadius = 100.0
         profilePic.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(profilePic)
         
-        name.text = user.name
+        name.text = self.user.name
         name.font = .systemFont(ofSize: 18)
         name.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(name)
         
-        email.text = user.email
+        email.text = self.user.email
         email.font = .systemFont(ofSize: 14)
         email.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(email)
@@ -120,8 +122,8 @@ class ProfileController: UIViewController {
         rateCash.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(rateCash)
         
-        if user.rate != nil {
-            rateField.text = user.rate
+        if self.user.rate != nil {
+            rateField.text = self.user.rate
         } else {
             rateField.placeholder = "..."
         }
@@ -138,8 +140,8 @@ class ProfileController: UIViewController {
         rateTime.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(rateTime)
         
-        self.courses = user.teaching
-        self.times = user.availability
+        self.courses = self.user.teaching!
+        self.times = self.user.availability
         
         if ownAccount {
             // MARK: Make users able to delete a course or availability
@@ -273,17 +275,8 @@ extension ProfileController: UITableViewDelegate {
             if selectedRow.code == addCourseString {
                 presentController()
             } else {
-                NetworkManager.dropTutor(courseID: selectedRow.id, UserID: user.id) {
-                    User in
-                    var index = 0
-                    while index < selectedRow.tutors.count {
-                        if User.id == selectedRow.tutors[index].id {
-                            selectedRow.tutors.remove(at: index)
-                            index += 1
-                        }
-                        index += 1
-                    }
-                    self.courses = self.user.teaching
+                NetworkManager.dropTutor(courseID: selectedRow.id, UserID: user.id) { User in
+                    self.courses = self.user.teaching!
                     self.courses.append(self.addRow)
                     self.tutoring.reloadData()
                 }
@@ -337,10 +330,8 @@ extension ProfileController: UITextFieldDelegate {
         if let text = rateField.text {
             if let double = Double(text) {
                 let rate = String(double)
-                let userID = String(user.id)
-                NetworkManager.updateRate(userID: userID, rate: rate) { _ in
-                    
-                }
+                let userID = String(self.user.id)
+                NetworkManager.updateRate(userID: userID, rate: rate) { _ in}
                 return true
             }
             showAlert()

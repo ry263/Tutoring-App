@@ -44,6 +44,9 @@ class CourseController: UIViewController {
         let centerY = self.view.center.y - 52.75
         let centerX = self.view.center.x - 65
         
+        NetworkManager.getAllCourses() { courses in
+            self.courses = courses
+        }
         
         extraText.frame = CGRect(x: centerX, y: centerY, width: 130, height: 105.5)
         extraText.textAlignment = .center
@@ -52,10 +55,6 @@ class CourseController: UIViewController {
         extraText.translatesAutoresizingMaskIntoConstraints = false
         extraText.clipsToBounds = true
         view.addSubview(extraText)
-        
-        NetworkManager.getAllCourses() { courses in
-            self.courses = courses
-        }
         
         resultsTableController = ResultsTableController()
         resultsTableController.parentController = self
@@ -96,27 +95,27 @@ class CourseController: UIViewController {
     }
 }
 
+// MARK: Networking Request
+
 extension CourseController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedRow = courses[indexPath.row]
+        print(selectedRow.code)
         if index == 1 {
             let checkIn: Bool = parentController!.courses.contains(selectedRow)
             if  !checkIn {
                 let courseID = String(selectedRow.id)
                 let userID = String(user.id)
-                NetworkManager.addTutor(courseID: courseID, userID: userID) { _ in
-                    
-                }
                 
-                parentController?.courses = user.teaching
-                parentController?.courses.append(parentController!.addRow)
-                parentController?.tutoring.reloadData()
-                navigationController?.popViewController(animated: true)
+                NetworkManager.addTutor(courseID: courseID, userID: userID) { _ in}
+                self.navigationController?.popViewController(animated: true)
+                self.parentController!.courses.insert(selectedRow, at: 0)
+                self.parentController?.tutoring.reloadData()
+                
             } else {
                 showAlert()
             }
         } else {
-            
             let vc = TutorController(course: selectedRow)
             vc.userViewing = parentController?.userViewing
             present(vc, animated: true, completion: nil)
@@ -131,33 +130,22 @@ extension CourseController: UISearchControllerDelegate, UISearchBarDelegate {
         
         NSLayoutConstraint.activate([ searchController.searchBar.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor,constant: 2*padding),searchController.searchBar.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -padding), searchController.searchBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),searchController.searchBar.bottomAnchor.constraint(equalTo: searchController.searchBar.topAnchor, constant: 2 * padding)])
         
-        
-        
     }
     
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         
-        let text = searchController.searchBar.text
-        
-        let whitespaceCharacterSet = CharacterSet.whitespaces
-        //Todo for networking
-        _ = text?.trimmingCharacters(in: whitespaceCharacterSet)
-        
-        do {
-            NetworkManager.getCourse(courseCode: text ?? "Invalid") { course in
+        if let text = searchController.searchBar.text {
+            let whitespaceCharacterSet = CharacterSet.whitespaces
+            let trimText = text.trimmingCharacters(in: whitespaceCharacterSet)
+            let modText = trimText.replacingOccurrences(of: " ", with: "")
+            
+            NetworkManager.getCourse(courseCode: modText) { course in
+                self.courses = [course]
                 self.resultsTableController.course = [course]
                 self.resultsTableController.tableView.reloadData()
             }
-        } 
-        
-        
-//        for course in allCourses {
-//            if course.code == text {
-//                resultsTableController.course = [course]
-//                resultsTableController.tableView.reloadData()
-//            }
-//        }
+        }
         
         searchBar.resignFirstResponder()
     }
@@ -168,21 +156,19 @@ extension CourseController: UISearchControllerDelegate, UISearchBarDelegate {
 class ResultsTableController: UITableViewController {
     let cellReuse = "CellReuse"
     var course: [Course] = []
-    weak var parentController: UIViewController?
+    weak var parentController: CourseController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.course = parentController?.courses ?? []
         
-        NetworkManager.getAllCourses() { courses in
-            self.course = courses
-        }
         
         tableView.register(SearchCell.self, forCellReuseIdentifier: cellReuse)
         
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return course.count
+        return self.course.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

@@ -84,20 +84,15 @@ class SignInController: UIViewController {
     @objc func SignIn() {
         let vc = SignUp()
         vc.parentController = self
+        vc.emailField.becomeFirstResponder()
         present(vc, animated: true, completion: nil)
     }
     
     @objc func LogIn() {
         let vc = LogOn()
         vc.parentController = self
+        vc.emailField.becomeFirstResponder()
         present(vc, animated: true, completion: nil)
-    }
-    
-    func proceed() {
-        let vc = TabBar()
-        vc.user = user
-        vc.setUpTabBar()
-        self.window?.rootViewController = vc
     }
 }
 
@@ -122,6 +117,7 @@ class LogOn: UIViewController {
         emailField.layer.cornerRadius = 10
         emailField.borderStyle = .none
         emailField.delegate = self
+        emailField.autocapitalizationType = .none
         emailField.textAlignment = .center
         emailField.backgroundColor = UIColor(red: 0.91, green: 0.92, blue: 0.72, alpha: 1.00)
         emailField.translatesAutoresizingMaskIntoConstraints = false
@@ -130,6 +126,7 @@ class LogOn: UIViewController {
         passField.layer.cornerRadius = 10
         passField.delegate = self
         passField.borderStyle = .none
+        passField.autocapitalizationType = .none
         passField.textAlignment = .center
         passField.backgroundColor = UIColor(red: 0.91, green: 0.92, blue: 0.72, alpha: 1.00)
         passField.translatesAutoresizingMaskIntoConstraints = false
@@ -176,21 +173,23 @@ extension LogOn: UITextFieldDelegate {
         if textField.isEqual(self.passField) {
             if emailField.text != nil && emailField.text != "" {
                 if passField.text != nil && passField.text != "" {
-                    networkLog(email: emailField.text!, password: passField.text!)
+                    NetworkManager.LogIn(email: emailField.text!, password: passField.text!) { User in
+                        self.parentController.user = User
+                        let vc = TabBar()
+                        vc.user = self.parentController.user
+                        vc.setUpTabBar()
+                        self.parentController.window?.rootViewController = vc
+                        return
+                    }
+                    showAlert()
+                    return
                 }
+                showAlert()
+                return
             }
-        }
-    }
-    
-    func networkLog(email: String, password: String) {
-        
-        NetworkManager.LogIn(email: email, password: password) { User in
-            self.dismiss(animated: true)
-            self.parentController.user = User
-            self.parentController.proceed()
+            showAlert()
             return
         }
-        showAlert()
     }
 }
 
@@ -216,6 +215,7 @@ class SignUp: UIViewController {
         emailField.layer.cornerRadius = 10
         emailField.delegate = self
         emailField.borderStyle = .none
+        emailField.autocapitalizationType = .none
         emailField.textAlignment = .center
         emailField.backgroundColor = UIColor(red: 0.91, green: 0.92, blue: 0.72, alpha: 1.00)
         emailField.translatesAutoresizingMaskIntoConstraints = false
@@ -224,6 +224,7 @@ class SignUp: UIViewController {
         passField.layer.cornerRadius = 10
         passField.delegate = self
         passField.borderStyle = .none
+        passField.autocapitalizationType = .none
         passField.textAlignment = .center
         passField.backgroundColor = UIColor(red: 0.91, green: 0.92, blue: 0.72, alpha: 1.00)
         passField.translatesAutoresizingMaskIntoConstraints = false
@@ -242,6 +243,7 @@ class SignUp: UIViewController {
         nameField.layer.cornerRadius = 10
         nameField.delegate = self
         nameField.textAlignment = .center
+        nameField.autocapitalizationType = .none
         nameField.backgroundColor = UIColor(red: 0.91, green: 0.92, blue: 0.72, alpha: 1.00)
         nameField.borderStyle = .none
         nameField.translatesAutoresizingMaskIntoConstraints = false
@@ -265,7 +267,7 @@ class SignUp: UIViewController {
     }
     
     func showAlert() {
-        let alert = UIAlertController(title: "Invalid input", message: "Invalid sign up", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Invalid input", message: "Invalid information", preferredStyle: .alert)
         
         alert.addAction(UIAlertAction(title: "Ok", style: .cancel) { _ in })
         
@@ -290,19 +292,27 @@ extension SignUp: UITextFieldDelegate {
                     showAlert()
                     return
                 }
+            
+            
             }
-            networkSign(email: emailField.text!, password: passField.text!, name: nameField.text!)
+            
+            let whitespaceCharacterSet = CharacterSet.whitespaces
+            
+            for field in array {
+                field.text = field.text!.trimmingCharacters(in: whitespaceCharacterSet)
+            }
+
+            NetworkManager.registerUser(email: emailField.text!, password: passField.text!, name: nameField.text!, profile_pic: "profile.png") { User in
+
+                self.parentController.user = User
+                let vc = TabBar()
+                vc.user = self.parentController.user
+                vc.setUpTabBar()
+                self.parentController.window?.rootViewController = vc
+                
+            }
 
             //MARK: Register User with fields and default profile pic
-        }
-        return
-    }
-    
-    func networkSign(email: String, password: String, name: String) {
-        NetworkManager.registerUser(email: email, password: password, name: name, profile_pic: "profile.png") { User in
-            self.dismiss(animated: true)
-            self.parentController.user = User
-            self.parentController.proceed()
         }
     }
 }

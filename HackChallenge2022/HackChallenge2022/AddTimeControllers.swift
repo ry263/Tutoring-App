@@ -54,7 +54,6 @@ class addTimeController: UIViewController {
         let strDate = dateFormatter.string(from: datePicker.date)
         
         NetworkManager.addAvailability(userID: user.id, time: strDate) { avail in
-            
         }
         let finalAvail = Availability(time: strDate, userID: user.id, ID: 4)
         self.navigationController?.popViewController(animated: true)

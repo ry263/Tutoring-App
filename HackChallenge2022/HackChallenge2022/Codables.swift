@@ -13,17 +13,17 @@ class User: Codable {
     var id: Int
     var name: String
     var email: String
-    var teaching: [Course]
+    var teaching: [Course]?
     var availability: [Availability]
     var notifications: [Notification]
     var rate: String?
     var profile_pic: String
-    var password_digest: String
+    var password_digest: String?
     var session_token: String
     var session_expiration: String
     var update_token: String
     
-    init(name: String, image: String, teaching: [Course], availability: [Availability], rate: String?, notifications:[Notification], email: String, ID: Int, password_digest: String, session_token: String, session_expiration: String, update_token: String) {
+    init(name: String, image: String, teaching: [Course], availability: [Availability], rate: String?, notifications:[Notification], email: String, ID: Int, password_digest: String, session_token: String,session_expiration: String, update_token: String) {
         self.name = name
         self.profile_pic = image
         self.teaching = teaching
@@ -42,7 +42,7 @@ class User: Codable {
 class Course: Codable {
     var id: Int
     var code: String
-    var tutors: [User]
+    var tutors: [User]?
     
     init(code: String,tutors: [User], id: Int) {
         self.code = code
@@ -63,11 +63,9 @@ class Notification: Codable {
     var id: Int
     var sender_id: Int
     var receiver_id: Int
-    var label: String
     var time: String
     
-    init(image: String, label: String, senderID: Int, receiverID: Int, ID: Int, time: String) {
-        self.label = label
+    init(image: String, senderID: Int, receiverID: Int, ID: Int, time: String) {
         self.sender_id = senderID
         self.receiver_id = receiverID
         self.id = ID
@@ -78,12 +76,12 @@ class Notification: Codable {
 class Availability: Codable {
     
     var time: String
-    var userID: Int
+    var user_id: Int
     var id: Int
     
     init(time: String, userID: Int, ID: Int) {
         self.time = time
-        self.userID = userID
+        self.user_id = userID
         self.id = ID
     }
 }
