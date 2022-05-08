@@ -469,7 +469,7 @@ def fill_courses():
     #     new_course = Course(code = code+ " "+  classnbr)
     #     db.session.add(new_course)
     #     db.session.commit()
-    return success_response({"courses": [c.serialize() for c in Course.query.all()]})
+    return success_response([c.serialize() for c in Course.query.all()])
 
 @app.route("/api/rate/<int:user_id>/", methods =["POST"])
 def add_rate(user_id):
