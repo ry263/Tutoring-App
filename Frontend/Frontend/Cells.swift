@@ -1,6 +1,6 @@
 //
 //  courseTableCell.swift
-//  HackChallenge2022
+//  Frontend
 //
 //  Created by Joel Valerio on 5/1/22.
 //
