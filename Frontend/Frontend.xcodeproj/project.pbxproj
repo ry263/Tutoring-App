@@ -29,7 +29,7 @@
 		C64C84372824F2EC00701B9D /* Intro.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Intro.swift; sourceTree = "<group>"; };
 		C64C843E28251C4900701B9D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C64C84402825909E00701B9D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		C6B17767281EE37B0035AB78 /* HackChallenge2022.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HackChallenge2022.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C6B17767281EE37B0035AB78 /* Frontend.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Frontend.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6B1776A281EE37B0035AB78 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C6B1776E281EE37B0035AB78 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		C6B17773281EE37E0035AB78 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -61,7 +61,7 @@
 		C6B1775E281EE37B0035AB78 = {
 			isa = PBXGroup;
 			children = (
-				C6B17769281EE37B0035AB78 /* HackChallenge2022 */,
+				C6B17769281EE37B0035AB78 /* Frontend */,
 				C6B17768281EE37B0035AB78 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -69,12 +69,12 @@
 		C6B17768281EE37B0035AB78 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				C6B17767281EE37B0035AB78 /* HackChallenge2022.app */,
+				C6B17767281EE37B0035AB78 /* Frontend.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		C6B17769281EE37B0035AB78 /* HackChallenge2022 */ = {
+		C6B17769281EE37B0035AB78 /* Frontend */ = {
 			isa = PBXGroup;
 			children = (
 				C6B1776A281EE37B0035AB78 /* AppDelegate.swift */,
@@ -94,15 +94,15 @@
 				C6B17778281EE37E0035AB78 /* Info.plist */,
 				C64C843E28251C4900701B9D /* GoogleService-Info.plist */,
 			);
-			path = HackChallenge2022;
+			path = Frontend;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		C6B17766281EE37B0035AB78 /* HackChallenge2022 */ = {
+		C6B17766281EE37B0035AB78 /* Frontend */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C6B1777B281EE37E0035AB78 /* Build configuration list for PBXNativeTarget "HackChallenge2022" */;
+			buildConfigurationList = C6B1777B281EE37E0035AB78 /* Build configuration list for PBXNativeTarget "Frontend" */;
 			buildPhases = (
 				C6B17763281EE37B0035AB78 /* Sources */,
 				C6B17764281EE37B0035AB78 /* Frameworks */,
@@ -112,13 +112,13 @@
 			);
 			dependencies = (
 			);
-			name = HackChallenge2022;
+			name = Frontend;
 			packageProductDependencies = (
 				C6B17782281EF2FB0035AB78 /* Alamofire */,
 				C6B17785281EF3AB0035AB78 /* GoogleSignIn */,
 			);
 			productName = HackChallenge2022;
-			productReference = C6B17767281EE37B0035AB78 /* HackChallenge2022.app */;
+			productReference = C6B17767281EE37B0035AB78 /* Frontend.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -136,7 +136,7 @@
 					};
 				};
 			};
-			buildConfigurationList = C6B17762281EE37B0035AB78 /* Build configuration list for PBXProject "HackChallenge2022" */;
+			buildConfigurationList = C6B17762281EE37B0035AB78 /* Build configuration list for PBXProject "Frontend" */;
 			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -153,7 +153,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				C6B17766281EE37B0035AB78 /* HackChallenge2022 */,
+				C6B17766281EE37B0035AB78 /* Frontend */,
 			);
 		};
 /* End PBXProject section */
@@ -327,7 +327,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 62SAQ9LDFP;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = HackChallenge2022/Info.plist;
+				INFOPLIST_FILE = Frontend/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -337,7 +337,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = AppDev.HackChallenge2022;
+				PRODUCT_BUNDLE_IDENTIFIER = AppDev.Frontend;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -354,7 +354,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 62SAQ9LDFP;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = HackChallenge2022/Info.plist;
+				INFOPLIST_FILE = Frontend/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -364,7 +364,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = AppDev.HackChallenge2022;
+				PRODUCT_BUNDLE_IDENTIFIER = AppDev.Frontend;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -375,7 +375,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		C6B17762281EE37B0035AB78 /* Build configuration list for PBXProject "HackChallenge2022" */ = {
+		C6B17762281EE37B0035AB78 /* Build configuration list for PBXProject "Frontend" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C6B17779281EE37E0035AB78 /* Debug */,
@@ -384,7 +384,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C6B1777B281EE37E0035AB78 /* Build configuration list for PBXNativeTarget "HackChallenge2022" */ = {
+		C6B1777B281EE37E0035AB78 /* Build configuration list for PBXNativeTarget "Frontend" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C6B1777C281EE37E0035AB78 /* Debug */,
