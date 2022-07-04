@@ -82,8 +82,8 @@ Response
 <HTTP STATUS CODE 200>
 {
     "id": 1,
-    "name": "Rachel Yue",
-    "email": "ry263@cornell.edu",
+    "name": "Lukman Moyosore",
+    "email": "lom4@cornell.edu",
     "profile_pic": "url for profile pic",
     "courses": [ <SERIALIZED COURSES WITHOUT USERS>, ... ],
     "availability": [ <SERIALIZED TIMES>, ... ],
@@ -151,8 +151,8 @@ Response
 <HTTP STATUS CODE 200>
 {
     "id": 1,
-    "name": "Rachel Yue",
-    "email": "ry263@cornell.edu",
+    "name": "Lukman Moyosore",
+    "email": "lom4@cornell.edu",
     "profile_pic": "url for profile pic",
     "courses": [ <SERIALIZED COURSES WITHOUT USERS>, ... ],
     "availability": [ <SERIALIZED TIMES>, ... ],
